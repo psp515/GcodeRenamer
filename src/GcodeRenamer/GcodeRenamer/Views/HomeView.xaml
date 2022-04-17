@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GcodeRenamer.Models"
+             xmlns:viewmodels="clr-namespace:GcodeRenamer.ViewModels"
+             x:Class="GcodeRenamer.HomeView"
+             Shell.NavBarIsVisible="False"
+             Title="HomeView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <Style TargetType="Frame" x:Key="CVFrame">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource Light}" />
+
+                <Setter Property="Margin"
+                        Value="20" />
+
+                <Setter Property="Padding"
+                        Value="20" />
+
+                <Setter Property="CornerRadius"
+                        Value="20" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+
+    <Frame CornerRadius="10"
+           BackgroundColor="{StaticResource LightGray}"
+           Padding="20">
+        <Grid WidthRequest="1100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.49*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="0.49*" />
+            </Grid.RowDefinitions>
+
+            <RefreshView Command="{Binding RefreshCollection}"
+                         CommandParameter="{Binding .}"
+                         RefreshColor="{StaticResource Primary}">
+                <CollectionView ItemsSource="{Binding FoundFiles}" VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:GcodeFile">
+                            <Frame Style="{StaticResource CVFrame}">
+                                <Grid Padding="30,10,30,10"
+                                      Margin="10,0,0,0"
+                                      HeightRequest="60">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*" />
+                                        <ColumnDefinition Width="0.4*" />
+                                        <ColumnDefinition Width="0.3*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Name}" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Path}" />
+
+
+                                    <ImageButton Grid.Column="2"
+                                            CornerRadius="10"
+                                            BackgroundColor="{StaticResource Primary}"
+                                                 CommandParameter="{Binding .}"
+                                                 Command="{Binding AddToStagingCommand, Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
+
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.Header>
+                        <Frame Style="{StaticResource CVFrame}"
+                               HorizontalOptions="Start">
+                            <Grid Padding="30,10,30,10">
+                                
+                                <Label Text="All Files"
+                                       FontSize="Title"
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold" />
+
+                                <ImageButton CornerRadius="10"
+                                             HorizontalOptions="End"
+                                             WidthRequest="60"
+                                             BackgroundColor="{StaticResource Primary}"
+                                             CommandParameter="{Binding .}"
+                                             Command="{Binding AddRoute, Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
+
+                                
+
+                            </Grid>
+                        </Frame>
+                    </CollectionView.Header>
+
+                </CollectionView>
+            </RefreshView>
+
+
+            <StackLayout Grid.Row="1"
+                         HeightRequest="3"
+                         BackgroundColor="{StaticResource Primary}"
+                         HorizontalOptions="FillAndExpand"
+                         Margin="0,10,0,10" />
+
+
+            <RefreshView Grid.Row="2">
+                <CollectionView ItemsSource="{Binding SelectedFiles}" VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:GcodeFile">
+                            <Frame Style="{StaticResource CVFrame}">
+                                <Grid Padding="30,10,30,10"
+                                      HeightRequest="60"
+                                      Margin="10,0,0,0">
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="0.3*" />
+                                        <ColumnDefinition Width="0.4*" />
+                                        <ColumnDefinition Width="0.3*" />
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Name}" />
+
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Path}" />
+
+                                  
+                                    <ImageButton Grid.Column="2" 
+                                                 CornerRadius="10"
+                                                 BackgroundColor="{StaticResource Primary}"
+                                                 CommandParameter="{Binding .}"
+                                                 Command="{Binding RemoveFromStagingCommand, Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.Header>
+                        <Frame Style="{StaticResource CVFrame}"
+                               HorizontalOptions="Start">
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition  Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*" />
+
+                                    <ColumnDefinition Width="0.5*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Selected Files"
+                                       Grid.ColumnSpan="2"
+                                       FontSize="Title"
+                                       HorizontalOptions="Center"
+                                       FontAttributes="Bold" />
+
+                                <Picker ItemsSource="{Binding Filaments}"
+                                        Grid.Column="0"
+                                        Grid.Row="1"
+                                        WidthRequest="300"
+                                        Margin="0,10,0,0"
+                                        Title="Filament type"
+                                        ItemDisplayBinding="{Binding Type}"
+                                        SelectedIndex="{Binding SelectedFilamentIndex}" />
+
+                                <Picker ItemsSource="{Binding FileFormats}"
+                                        WidthRequest="300"
+                                        Title="Format"
+                                        Grid.Column="1"
+                                        Grid.Row="1"
+                                        Margin="0,10,0,0"
+                                        SelectedIndex="{Binding SelectedFileForamatIndex}" />
+
+                            </Grid>
+                        </Frame>
+                    </CollectionView.Header>
+
+                </CollectionView>
+            </RefreshView>
+        </Grid>
+    </Frame>
+</ContentPage>
