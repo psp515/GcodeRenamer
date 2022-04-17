@@ -2,7 +2,7 @@
 
 namespace GcodeRenamer.Platforms.Windows.Implementations
 {
-    internal class MyFolderPicker : IFolderPicker
+    internal class MyFolderPicker : IFolderService
     {
         public async Task<string> PickFolder()
         {

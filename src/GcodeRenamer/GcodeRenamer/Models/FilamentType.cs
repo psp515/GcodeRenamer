@@ -8,7 +8,12 @@ namespace GcodeRenamer.Models
 {
     public class FilamentType
     {
-        public int Id { get; set; }
+        public FilamentType(string type, double density)
+        {
+            this.Type = type;
+            this.Density = density;
+        }
+
         public string Type { get; set; }
         public double Density { get; set; }
     }

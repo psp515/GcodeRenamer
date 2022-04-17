@@ -3,16 +3,12 @@ using GcodeRenamer.Models;
 
 namespace GcodeRenamer.Platforms.Windows.Implementations
 {
-    internal class FileService : IFileService
+    internal class FilePickerWindowsService : IFileService
     {
-        public async Task<string[]> GetGcodeFile(GcodeFile gcodeFile)
-        {
-            string[] text = File.ReadAllLines(gcodeFile.Path);
+        public async Task<string[]> ReadGcodeFile(GcodeFile gcodeFile) =>  File.ReadAllLines(gcodeFile.Path);
+        
 
-            return text;
-        }
-
-        public async Task<List<GcodeFile>> GetGcodeFiles(string directoryPath)
+        public async Task<List<GcodeFile>> GetGcodeFilesFromDirectory(string directoryPath)
         {
             List<GcodeFile> Files = new List<GcodeFile>();
 
@@ -27,12 +23,11 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
             return Files;
         }
 
-        public async Task<bool> SaveFile(string new_path, GcodeFile gcodeFile)
+        public async Task<bool> SaveFileWithNewName(string new_path, GcodeFile gcodeFile)
         {
             try
             {
                 File.Delete(new_path);
-
                 File.Move(gcodeFile.Path, new_path);
 
                 return true;

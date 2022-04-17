@@ -1,11 +1,24 @@
-﻿namespace GcodeRenamer;
+﻿using GcodeRenamer.Models;
+
+namespace GcodeRenamer;
 
 public partial class App : Application
 {
-	public App()
+
+
+    public App()
 	{
 		InitializeComponent();
 
 		MainPage = new AppShell();
-	}
+
+        RegisterRoutes();
+    }
+
+    private void RegisterRoutes()
+    {
+        Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
+        Routing.RegisterRoute(nameof(HelpView), typeof(HelpView));
+        Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
+    }
 }

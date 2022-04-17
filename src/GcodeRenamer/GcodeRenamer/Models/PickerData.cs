@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GcodeRenamer.ViewModels
+namespace GcodeRenamer.Models
 {
-    internal class FileFormatViewModel
+    public class PickerData<T>
     {
+        public int Index { get; set; }
+        public T Data { get; set; }
     }
 }

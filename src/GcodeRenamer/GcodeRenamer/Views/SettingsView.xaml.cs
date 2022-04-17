@@ -8,7 +8,7 @@ public partial class SettingsView : ContentPage
 	public SettingsView()
 	{
 		InitializeComponent();
-		BindingContext = ViewModel;
+		BindingContext = ViewModel = new SettingsViewModel();
 	}
 
     protected override void OnAppearing()
@@ -16,4 +16,10 @@ public partial class SettingsView : ContentPage
         base.OnAppearing();
 		ViewModel.OnAppearing();
 	}
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+		ViewModel.OnDisappearing();
+    }
 }

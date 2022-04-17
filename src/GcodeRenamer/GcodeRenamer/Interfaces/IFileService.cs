@@ -9,8 +9,25 @@ namespace GcodeRenamer.Interfaces
 {
     public interface IFileService
     {
-        Task<bool> SaveFile(string new_name, GcodeFile gcodeFile);
-        Task<string[]> GetGcodeFile(GcodeFile gcodeFile);
-        Task<List<GcodeFile>> GetGcodeFiles(string directoryPath);
+        /// <summary>
+        /// Renames file with changed name.
+        /// </summary>
+        /// <param name="new_name"></param>
+        /// <param name="gcodeFile"></param>
+        /// <returns></returns>
+        Task<bool> SaveFileWithNewName(string new_name, GcodeFile gcodeFile);
+
+        /// <summary>
+        /// Returns file data.
+        /// </summary>
+        /// <param name="gcodeFile"></param>
+        /// <returns></returns>
+        Task<string[]> ReadGcodeFile(GcodeFile gcodeFile);
+        /// <summary>
+        /// Returns GcodeFiles From Directory
+        /// </summary>
+        /// <param name="directoryPath"></param>
+        /// <returns></returns>
+        Task<List<GcodeFile>> GetGcodeFilesFromDirectory(string directoryPath);
     }
 }

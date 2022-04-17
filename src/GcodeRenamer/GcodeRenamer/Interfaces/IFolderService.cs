@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GcodeRenamer.Interfaces
 {
-    public interface IFolderPicker
+    public interface IFolderService
     {
         Task<string> PickFolder();
     }

@@ -32,7 +32,7 @@
     <Frame CornerRadius="10"
            BackgroundColor="{StaticResource LightGray}"
            Padding="20">
-        <Grid WidthRequest="1100">
+        <Grid WidthRequest="800">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.49*" />
                 <RowDefinition Height="Auto" />
@@ -41,7 +41,7 @@
 
             <RefreshView Command="{Binding RefreshCollection}"
                          CommandParameter="{Binding .}"
-                         RefreshColor="{StaticResource Primary}">
+                         RefreshColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Dark}}">
                 <CollectionView ItemsSource="{Binding FoundFiles}" VerticalScrollBarVisibility="Never">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:GcodeFile">
@@ -85,8 +85,6 @@
                                 <ImageButton CornerRadius="10"
                                              HorizontalOptions="End"
                                              WidthRequest="60"
-                                             BackgroundColor="{StaticResource Primary}"
-                                             CommandParameter="{Binding .}"
                                              Command="{Binding AddRoute, Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
 
                                 
@@ -101,7 +99,7 @@
 
             <StackLayout Grid.Row="1"
                          HeightRequest="3"
-                         BackgroundColor="{StaticResource Primary}"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Dark}}"
                          HorizontalOptions="FillAndExpand"
                          Margin="0,10,0,10" />
 
@@ -166,8 +164,8 @@
                                         WidthRequest="300"
                                         Margin="0,10,0,0"
                                         Title="Filament type"
-                                        ItemDisplayBinding="{Binding Type}"
-                                        SelectedIndex="{Binding SelectedFilamentIndex}" />
+                                        ItemDisplayBinding="{Binding Data.Type}"
+                                        SelectedItem="{Binding SelectedFilament}" />
 
                                 <Picker ItemsSource="{Binding FileFormats}"
                                         WidthRequest="300"
@@ -175,7 +173,8 @@
                                         Grid.Column="1"
                                         Grid.Row="1"
                                         Margin="0,10,0,0"
-                                        SelectedIndex="{Binding SelectedFileForamatIndex}" />
+                                        ItemDisplayBinding="{Binding Data}"
+                                        SelectedItem="{Binding SelectedFileForamat}" />
 
                             </Grid>
                         </Frame>
