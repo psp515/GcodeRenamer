@@ -65,6 +65,7 @@ namespace GcodeRenamer.ViewModels
         {
             IsBusy = true;
 
+            //  tu dziwny error
             Settings.Filament = SelectedFilament.Index;
             Settings.Theme = SelcetedThemeIndex;
             Settings.FileForamat = SelectedFileForamatIndex;

@@ -3,192 +3,167 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GcodeRenamer.SettingsView"
              Title="SettingsView">
-    
+
     <!-- TODO sCOROOLVIEw bo sie cos jebie-->
 
-    <Grid>
-        <Frame CornerRadius="10"
-               BackgroundColor="{StaticResource LightGray}"
-               Padding="20">
-            <StackLayout Spacing="5"
-                         WidthRequest="800">
 
-                <Label Text="Overall"
-                       FontAttributes="Bold"
-                       FontSize="Title"
-                       Grid.ColumnSpan="2"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center" />
+    <Frame Style="{StaticResource ViewFrame}">
+        <StackLayout Spacing="5"
+                     HorizontalOptions="Start"
+                     WidthRequest="800">
 
-                <Frame CornerRadius="10"
-                       Margin="10"
-                       BackgroundColor="{StaticResource Light}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
+            <Label  Style="{StaticResource Title}"
+                    Text="Overall"
+                    Grid.ColumnSpan="2" />
 
-                        <Label Text="Theme"
-                               FontSize="Small"
-                               VerticalOptions="Center"/>
+            <Frame Style="{StaticResource CollectionViewFrame}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Picker Grid.Column="1"
-                                ItemsSource="{Binding Themes}"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="Center"
-                                WidthRequest="400"
-                                ItemDisplayBinding="{Binding Data}"
-                                SelectedIndex="{Binding SelcetedThemeIndex}" />
+                    <Label Text="Theme"
+                           FontSize="Small"
+                           VerticalOptions="Center" />
 
-                    </Grid>
-                </Frame>
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding Themes}"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Center"
+                            WidthRequest="400"
+                            ItemDisplayBinding="{Binding Data}"
+                            SelectedIndex="{Binding SelcetedThemeIndex}" />
 
-                <Frame CornerRadius="10"
-                       Margin="10"
-                       BackgroundColor="{StaticResource Light}">
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
+                </Grid>
+            </Frame>
 
-                        <Label Text="Default filament"
-                               FontSize="Small"
-                               VerticalOptions="Center"/>
+            <Frame Style="{StaticResource CollectionViewFrame}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Picker Grid.Column="1"
-                                ItemsSource="{Binding Filaments}"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="Center"
-                                WidthRequest="400"
-                                ItemDisplayBinding="{Binding Data.Type}"
-                                SelectedItem="{Binding SelectedFilament}" />
+                    <Label Text="Default filament"
+                           FontSize="Small"
+                           VerticalOptions="Center" />
 
-                    </Grid>
-                </Frame>
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding Filaments}"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Center"
+                            WidthRequest="400"
+                            ItemDisplayBinding="{Binding Data.Type}"
+                            SelectedItem="{Binding SelectedFilament}" />
 
-                <Frame CornerRadius="10"
-                       Margin="10"
-                       BackgroundColor="{StaticResource Light}">
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
+                </Grid>
+            </Frame>
 
-                        <Label Text="Default file format"
-                               FontSize="Small"
-                               VerticalOptions="Center" />
+            <Frame Style="{StaticResource CollectionViewFrame}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Picker Grid.Column="1"
-                                ItemsSource="{Binding FileFormats}"
-                                HorizontalOptions="Fill"
-                                WidthRequest="400"
-                                VerticalOptions="Center"
-                                ItemDisplayBinding="{Binding Data}"
-                                SelectedIndex="{Binding SelectedFileForamatIndex}" />
+                    <Label Text="Default file format"
+                           FontSize="Small"
+                           VerticalOptions="Center" />
 
-                    </Grid>
-                </Frame>
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding FileFormats}"
+                            HorizontalOptions="Fill"
+                            WidthRequest="400"
+                            VerticalOptions="Center"
+                            ItemDisplayBinding="{Binding Data}"
+                            SelectedIndex="{Binding SelectedFileForamatIndex}" />
+
+                </Grid>
+            </Frame>
 
 
-                <Label Text="File Format"
-                       FontAttributes="Bold"
-                       FontSize="Title"
-                       Grid.ColumnSpan="2"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center" />
+            <Label Style="{StaticResource Title}"
+                   Text="File Format"
+                   Grid.ColumnSpan="2" />
 
-                <Frame CornerRadius="10"
-                       Margin="10"
-                       BackgroundColor="{StaticResource Light}">
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
+            <Frame Style="{StaticResource CollectionViewFrame}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Label Text="Weight Format"
-                               FontSize="Small"
-                               VerticalOptions="Center"/>
+                    <Label Text="Weight Format"
+                           FontSize="Small"
+                           VerticalOptions="Center" />
 
 
-                        <Picker Grid.Column="1"
-                                ItemsSource="{Binding WeightFormats}"
-                                HorizontalOptions="Fill"
-                                WidthRequest="400"
-                                VerticalOptions="Center"
-                                ItemDisplayBinding="{Binding Data}"
-                                SelectedIndex="{Binding SelectedWeightFormatIndex}" />
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding WeightFormats}"
+                            HorizontalOptions="Fill"
+                            WidthRequest="400"
+                            VerticalOptions="Center"
+                            ItemDisplayBinding="{Binding Data}"
+                            SelectedIndex="{Binding SelectedWeightFormatIndex}" />
 
-                    </Grid>
-                </Frame>
+                </Grid>
+            </Frame>
 
-                <Frame CornerRadius="10"
-                       Margin="10"
-                       BackgroundColor="{StaticResource Light}">
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
+            <Frame Style="{StaticResource CollectionViewFrame}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Label Text="Length Format"
-                               FontSize="Small"
-                               VerticalOptions="Center"/>
+                    <Label Text="Length Format"
+                           FontSize="Small"
+                           VerticalOptions="Center" />
 
 
-                        <Picker Grid.Column="1"
-                                ItemsSource="{Binding LengthFormats}"
-                                HorizontalOptions="Fill"
-                                WidthRequest="400"
-                                VerticalOptions="Center"
-                                ItemDisplayBinding="{Binding Data}"
-                                SelectedIndex="{Binding SelectedLengthFormatIndex}" />
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding LengthFormats}"
+                            HorizontalOptions="Fill"
+                            WidthRequest="400"
+                            VerticalOptions="Center"
+                            ItemDisplayBinding="{Binding Data}"
+                            SelectedIndex="{Binding SelectedLengthFormatIndex}" />
 
-                    </Grid>
-                </Frame>
+                </Grid>
+            </Frame>
 
-                <Frame CornerRadius="10"
-                       Margin="10"
-                       BackgroundColor="{StaticResource Light}">
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
+            <Frame Style="{StaticResource CollectionViewFrame}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Label Text="Time Format"
-                               FontSize="Small"
-                               VerticalOptions="Center" />
+                    <Label Text="Time Format"
+                           FontSize="Small"
+                           VerticalOptions="Center" />
 
 
-                        <Picker Grid.Column="1"
-                                ItemsSource="{Binding TimeFormats}"
-                                HorizontalOptions="Fill"
-                                WidthRequest="400"
-                                VerticalOptions="Center"
-                                ItemDisplayBinding="{Binding Data}"
-                                SelectedIndex="{Binding SelectedTimeFormatIndex}" />
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding TimeFormats}"
+                            HorizontalOptions="Fill"
+                            WidthRequest="400"
+                            VerticalOptions="Center"
+                            ItemDisplayBinding="{Binding Data}"
+                            SelectedIndex="{Binding SelectedTimeFormatIndex}" />
 
 
-                    </Grid>
-                </Frame>
+                </Grid>
+            </Frame>
 
-                <ImageButton HorizontalOptions="End"
-                             VerticalOptions="Start"
-                             Margin="20"
-                             Padding="10"
-                             WidthRequest="70"
-                             HeightRequest="70"
-                             CornerRadius="10"
-                             BackgroundColor="{StaticResource Primary}"
-                             Command="{Binding UpdateSettingsCommand}" />
+            <Button Style="{StaticResource CollectionViewButton}"
+                    Text="Save"
+                    WidthRequest="70"
+                    HeightRequest="60"
+                    Margin="0,0,20,0"
+                    Command="{Binding UpdateSettingsCommand}" />
 
-            </StackLayout>
-        </Frame>
-
-       
-    </Grid>
+        </StackLayout>
+    </Frame>
 </ContentPage>
