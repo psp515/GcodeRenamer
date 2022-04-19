@@ -18,8 +18,7 @@
                 <RowDefinition Height="0.49*" />
             </Grid.RowDefinitions>
 
-            <RefreshView Command="{Binding RefreshCollection}"
-                         CommandParameter="{Binding .}">
+            <RefreshView Command="{Binding RefreshCollectionCommand}">
                 <CollectionView ItemsSource="{Binding FoundFiles}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:GcodeFile">
@@ -59,7 +58,7 @@
                                 <Button Style="{StaticResource CollectionViewButton}"
                                         Text="Add route"
                                         HorizontalOptions="End"
-                                        Command="{Binding AddRoute, Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
+                                        Command="{Binding AddRouteCommand, Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
 
 
 
@@ -78,7 +77,8 @@
                          Margin="0,10,0,10" />
 
 
-            <RefreshView Grid.Row="2">
+            <RefreshView Command="{Binding RefreshCollectionCommand}"
+                         Grid.Row="2">
                 <CollectionView ItemsSource="{Binding SelectedFiles}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:GcodeFile">

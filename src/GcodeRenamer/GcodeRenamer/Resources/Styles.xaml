@@ -157,4 +157,25 @@
     </Style>
 
 
+
+
+    <Style x:Key="BaseStyle"
+           TargetType="Element">
+        <Setter Property="Shell.FlyoutBackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        <Setter Property="Shell.TitleColor"
+                Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+        <Setter Property="Shell.DisabledColor"
+                Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource DarkGray}}" />
+        <Setter Property="Shell.UnselectedColor"
+                Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource DarkGray}}" />
+        <Setter Property="Shell.NavBarHasShadow"
+                Value="False" />
+    </Style>
+
+    <Style BasedOn="{StaticResource BaseStyle}"
+           TargetType="ShellItem"
+           ApplyToDerivedTypes="True" />
+
+
 </ResourceDictionary>

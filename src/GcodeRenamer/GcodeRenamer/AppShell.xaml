@@ -6,30 +6,7 @@
        Shell.NavBarIsVisible="False"
        Shell.FlyoutBehavior="Locked">
 
-    <Shell.Resources>
-        <ResourceDictionary>
-            <Style x:Key="BaseStyle"
-                   TargetType="Element">
-                <Setter Property="Shell.BackgroundColor"
-                        Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource SecondaryDark}}" />
-                <Setter Property="Shell.ForegroundColor"
-                        Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource SecondaryDark}}" />
-                <Setter Property="Shell.TitleColor"
-                        Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
-                <Setter Property="Shell.DisabledColor"
-                        Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource DarkGray}}" />
-                <Setter Property="Shell.UnselectedColor"
-                        Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource DarkGray}}" />
-                <Setter Property="Shell.NavBarHasShadow"
-                        Value="False" />
-            </Style>
-
-            <Style BasedOn="{StaticResource BaseStyle}"
-                   TargetType="ShellItem"
-                   ApplyToDerivedTypes="True" />
-            
-        </ResourceDictionary>
-    </Shell.Resources>
+   
 
     <Shell.FlyoutHeader>
         <Grid>
@@ -50,6 +27,7 @@
                    HorizontalOptions="Center" />
         </Grid>
     </Shell.FlyoutFooter>
+
 
     <FlyoutItem Title="Home">
         <ShellContent Title="Home"

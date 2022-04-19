@@ -159,9 +159,10 @@
 
             <Button Style="{StaticResource CollectionViewButton}"
                     Text="Save"
+                    HorizontalOptions="Start"
                     WidthRequest="70"
                     HeightRequest="60"
-                    Margin="0,0,20,0"
+                    Margin="15,0,00,0"
                     Command="{Binding UpdateSettingsCommand}" />
 
         </StackLayout>

@@ -155,9 +155,10 @@ namespace GcodeRenamer.ViewModels
             {
                 IsBusy = true;
 
-                
                 string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancle", @"C:\...");
-                await DirectoryPathService.AddItemAsync(new DirectoryPath { Path = path });
+                //TODO Is valid route 
+                if(path != null)    
+                    await DirectoryPathService.AddItemAsync(new DirectoryPath { Path = path });
             }
         }
 
