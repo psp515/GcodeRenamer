@@ -5,7 +5,7 @@
              Title="SettingsView">
 
     <Frame Style="{StaticResource ViewFrame}">
-        <ScrollView >
+        <ScrollView Orientation="Both">
             <StackLayout Spacing="5"
                          HorizontalOptions="Start"
                          WidthRequest="900">
@@ -15,7 +15,7 @@
                         Grid.ColumnSpan="2" />
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -38,7 +38,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -61,7 +61,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -89,7 +89,7 @@
                        Grid.ColumnSpan="2" />
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -113,7 +113,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -137,7 +137,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -162,7 +162,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CollectionViewFrame}">
-                    <Grid HeightRequest="50">
+                    <Grid HeightRequest="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -189,9 +189,9 @@
                 <Button Style="{StaticResource CollectionViewButton}"
                         Text="Save"
                         HorizontalOptions="Start"
-                        WidthRequest="70"
+                        WidthRequest="130"
                         HeightRequest="60"
-                        Margin="15,0,00,0"
+                        Margin="15,0,40,50"
                         Command="{Binding UpdateSettingsCommand}" />
 
             </StackLayout>

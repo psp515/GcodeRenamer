@@ -13,6 +13,7 @@ namespace GcodeRenamer.ViewModels
             builder.Services.AddSingleton<HomeViewModel>();
             builder.Services.AddSingleton<HelpViewModel>();
             builder.Services.AddSingleton<SettingsViewModel>();
+            builder.Services.AddSingleton<RouteManageViewModel>();
 
             return builder;
         }

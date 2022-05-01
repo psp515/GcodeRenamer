@@ -82,16 +82,10 @@ namespace GcodeRenamer.ViewModels
             await Task.Delay(DELAY);
 
             FoundFiles.Clear();
+            SelectedFiles.Clear();
 
+            IsBusy = false;
             FindFiles();
-            
-            foreach(GcodeFile gcodeFile in SelectedFiles)
-            {
-                if (FoundFiles.Contains(gcodeFile))
-                    FoundFiles.Remove(gcodeFile);
-                else
-                    SelectedFiles.Remove(gcodeFile);
-            }
 
             IsBusy = false;
         }
@@ -166,6 +160,7 @@ namespace GcodeRenamer.ViewModels
                 if (SelectedFiles.Count() == 0) 
                 {
                     await Shell.Current.DisplayAlert("Files", "There is no files to convert.", "Ok");
+                    IsBusy = false;
                     return;
                 }
 

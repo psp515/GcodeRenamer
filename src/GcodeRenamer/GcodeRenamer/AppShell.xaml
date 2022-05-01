@@ -35,6 +35,12 @@
                       Route="HomeView" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Route Manager">
+        <ShellContent Title="Route Manager"
+                      ContentTemplate="{DataTemplate local:RouteManageView}"
+                      Route="RouteManageView" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Help">
         <ShellContent Title="Help"
                       ContentTemplate="{DataTemplate local:HelpView}"
