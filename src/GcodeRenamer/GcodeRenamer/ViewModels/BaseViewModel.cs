@@ -38,7 +38,5 @@ namespace GcodeRenamer.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        protected IService<DirectoryPath> DirectoryPathService = DependencyService.Get<IService<DirectoryPath>>();
     }
 }

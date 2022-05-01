@@ -1,6 +1,4 @@
-﻿using GcodeRenamer.Interfaces;
-using GcodeRenamer.Models;
-using GcodeRenamer.Services;
+﻿using GcodeRenamer.Services;
 using GcodeRenamer.ViewModels;
 using GcodeRenamer.Views;
 

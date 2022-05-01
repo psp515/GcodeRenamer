@@ -7,7 +7,7 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
 {
     internal class FileWindowsService : IFileService
     {
-        public async Task<string[]> ReadGcodeFile(GcodeFile gcodeFile) =>  File.ReadAllLines(gcodeFile.FilePath);
+
         
 
         public async Task<List<GcodeFile>> GetGcodeFilesFromDirectory(string directoryPath)
@@ -31,14 +31,16 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
                     {
                         if (isMarlin)
                         {
-                            if (lines[i].Contains("Time"))
+                            if (lines[i].Contains("TIME"))
                             {
                                 seconds = int.Parse(lines[i].Split(":")[1]);
                             }
 
                             if (lines[i].Contains("Filament used") && lines[i].Contains("Filament"))
                             {
-                                length = Math.Round(double.Parse(lines[i].Split(":")[1]), 2);
+                                // tutaj dziwnie bo trzeba zamienic . na ,
+                                string strLen = lines[i].Split(":")[1].Replace('m', ' ').Replace('.',',').Trim();
+                                length = Convert.ToDouble(strLen);
                             }
 
                             if (lines[i].Contains("M190"))
@@ -69,7 +71,7 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
 
                     Files.Add(new GcodeFile()
                     {
-                        Name = fileInfo.Name,
+                        Name = fileInfo.Name.Replace(".gcode", ""),
                         FilePath = fileInfo.FullName,
                         DirectoryPath = fileInfo.DirectoryName,
 
@@ -86,15 +88,34 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
             return Files;
         }
 
-        public async Task<bool> SaveFileWithNewName(string new_path, GcodeFile gcodeFile)
+        public async Task<bool> SaveFileWithNewName(string newName, GcodeFile gcodeFile)
         {
             try
             {
-                File.Move(gcodeFile.FilePath, Path.Combine(gcodeFile.DirectoryPath, new_path));
+                string dirName = gcodeFile.DirectoryPath+"\\"+"convertedGcode";
+                if (!Directory.Exists(dirName))
+                    Directory.CreateDirectory(gcodeFile.DirectoryPath+"\\"+"convertedGcode");
+
+                string newPath = Path.Combine(gcodeFile.DirectoryPath, "convertedGcode", newName) + ".gcode";
+
+                if (File.Exists(newPath))
+                    File.Delete(newPath);
+                
+
+                using(StreamReader sr = File.OpenText(gcodeFile.FilePath))
+                {
+                    string lines = sr.ReadToEnd();
+
+                    using (StreamWriter sw = File.CreateText(newPath))
+                    {
+                        sw.Write(lines);
+                    }
+                }
+            
 
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

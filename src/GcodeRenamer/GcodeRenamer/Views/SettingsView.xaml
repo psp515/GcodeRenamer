@@ -4,14 +4,11 @@
              x:Class="GcodeRenamer.SettingsView"
              Title="SettingsView">
 
-    <!-- TODO sCOROOLVIEw bo sie cos jebie-->
-
-
     <Frame Style="{StaticResource ViewFrame}">
-        <ScrollView>
+        <ScrollView >
             <StackLayout Spacing="5"
                          HorizontalOptions="Start"
-                         WidthRequest="800">
+                         WidthRequest="900">
 
                 <Label  Style="{StaticResource Title}"
                         Text="Overall"
@@ -182,7 +179,7 @@
                                 HorizontalOptions="Center"
                                 WidthRequest="350"
                                 VerticalOptions="Center"
-                                ItemDisplayBinding="{Binding Data}"
+                                ItemDisplayBinding="{Binding Data,StringFormat='{0} mm'}"
                                 SelectedIndex="{Binding SelectedRadiusFormat}" />
 
 

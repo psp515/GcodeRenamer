@@ -6,18 +6,17 @@ namespace GcodeRenamer;
 
 public partial class HomeView : ContentPage
 {
-    //private HomeViewModel ViewModel => BindingContext as HomeViewModel;
-    private HomeViewModel vm;
+    private HomeViewModel ViewModel => BindingContext as HomeViewModel;
 
-	public HomeView()
+	public HomeView(HomeViewModel vm)
 	{
         InitializeComponent();
-        BindingContext = vm = new HomeViewModel();
+        BindingContext = vm;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        vm.OnAppearing();
+        ViewModel.OnAppearing();
     }
 }

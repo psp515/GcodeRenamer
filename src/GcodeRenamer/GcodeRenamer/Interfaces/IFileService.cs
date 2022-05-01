@@ -18,12 +18,6 @@ namespace GcodeRenamer.Interfaces
         Task<bool> SaveFileWithNewName(string new_name, GcodeFile gcodeFile);
 
         /// <summary>
-        /// Returns file data.
-        /// </summary>
-        /// <param name="gcodeFile"></param>
-        /// <returns></returns>
-        Task<string[]> ReadGcodeFile(GcodeFile gcodeFile);
-        /// <summary>
         /// Returns GcodeFiles From Directory
         /// </summary>
         /// <param name="directoryPath"></param>

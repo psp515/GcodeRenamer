@@ -57,8 +57,8 @@ namespace GcodeRenamer.Utils
 
         public static List<PickerData<string>> Radius = new List<PickerData<string>>
         {
-            new PickerData<string> { Index = 0, Data="1.75 mm" },
-            new PickerData<string> { Index = 1, Data="2.85 mm" },
+            new PickerData<string> { Index = 0, Data="1.75" },
+            new PickerData<string> { Index = 1, Data="2.85" },
         };
 
     }

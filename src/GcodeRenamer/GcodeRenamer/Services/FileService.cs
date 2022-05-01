@@ -43,15 +43,6 @@ namespace GcodeRenamer.Services
         /// <returns></returns>
         public async Task<List<GcodeFile>> GetGcodeFilesData(string directoryPaths) => await fileService.GetGcodeFilesFromDirectory(directoryPaths);
 
-
-        /// <summary>
-        /// Function reads all file line by line and returns it.
-        /// </summary>
-        /// <param name="gcodeFile"></param>
-        /// <returns></returns>
-        public async Task<string[]> ReadGcodeFile(GcodeFile gcodeFile) => await fileService.ReadGcodeFile(gcodeFile);
-
-
         /// <summary>
         /// Function saves the same file with new name.
         /// </summary>

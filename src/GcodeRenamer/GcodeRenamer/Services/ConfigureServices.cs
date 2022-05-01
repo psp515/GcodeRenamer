@@ -17,9 +17,11 @@ namespace GcodeRenamer.Services
             /* Implementation */
 #if WINDOWS
             builder.Services.AddSingleton<IFileService, Platforms.Windows.Implementations.FileWindowsService>();
+            builder.Services.AddSingleton<IFolderService, Platforms.Windows.Implementations.MyFolderPicker>();
 #endif
 
             builder.Services.TryAddTransient<FileService>();
+            builder.Services.AddSingleton<FolderService>();
 
             /* DB */
             builder.Services.AddSingleton<RouteService>();

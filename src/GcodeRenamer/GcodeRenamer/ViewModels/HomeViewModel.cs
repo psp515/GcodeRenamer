@@ -22,6 +22,7 @@ namespace GcodeRenamer.ViewModels
         public PickerData<FilamentType> SelectedFilament { get => selectedFilament; set => SetProperty(ref selectedFilament, value); }
 
         public List<PickerData<string>> FileFormats { get; set; }
+
         PickerData<string> selectedFileForamat;
         public PickerData<string> SelectedFileForamat { get => selectedFileForamat; set => SetProperty(ref selectedFileForamat, value); }
 
@@ -34,13 +35,15 @@ namespace GcodeRenamer.ViewModels
         public Command<GcodeFile> AddToStagingCommand { get; }
         public Command<GcodeFile> RemoveFromStagingCommand { get; }
 
-        private readonly IFolderService FolderPicker;
+        private readonly FolderService FolderPicker;
         private readonly FileService FileService;
         private readonly RouteService RouteService;
 
-        public HomeViewModel(RouteService routeService)
+        public HomeViewModel(FileService fileService, FolderService folderService, RouteService routeService)
         {
-            this.RouteService = routeService;
+            RouteService = routeService;
+            FolderPicker = folderService;
+            FileService = fileService;
 
             FoundFiles = new ObservableCollection<GcodeFile>();
             SelectedFiles = new ObservableCollection<GcodeFile>();
@@ -56,51 +59,19 @@ namespace GcodeRenamer.ViewModels
             RemoveFromStagingCommand = new Command<GcodeFile>(RemoveFromStaging);
 
             RefreshCollectionCommand = new Command(RefreshCollection);
-
-            //FolderPicker = folderPicker;
-            //FileService = fileService;
         }
 
 
 
-        public HomeViewModel()
-        {
 
-            FoundFiles = new ObservableCollection<GcodeFile>();
-            SelectedFiles = new ObservableCollection<GcodeFile>();
-
-            Filaments = Helpers.Filaments;
-            FileFormats = Helpers.FileForamts;
-
-            FindFilesCommand = new Command(FindFiles);
-            ConvertFilesCommand = new Command(ConvertFiles);
-            AddRouteCommand = new Command(AddRoute);
-
-            AddToStagingCommand = new Command<GcodeFile>(AddToStaging);
-            RemoveFromStagingCommand = new Command<GcodeFile>(RemoveFromStaging);
-
-            RefreshCollectionCommand = new Command(RefreshCollection);
-
-        }
-
-        protected internal override void OnAppearing()
+        protected internal override async void OnAppearing()
         {
             base.OnAppearing();
 
             SelectedFilament = Filaments[Settings.Filament];
             SelectedFileForamat = FileFormats[Settings.FileForamat];
 
-            //DirectoryPathService.AddItemAsync(new DirectoryPath { Path = @"C:\Users\psp515\Desktop" });
-
-            SelectedFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path", Name="Name" });
-            SelectedFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path1", Name="Name1" });
-            SelectedFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path2", Name="Name2" });
-
-            FoundFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path3", Name="Name3" });
-            FoundFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path4", Name="Name4" });
-            FoundFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path5", Name="Name5" });
-
-            //FindFiles();
+            FindFiles();
         }
 
 
@@ -112,9 +83,7 @@ namespace GcodeRenamer.ViewModels
 
             FoundFiles.Clear();
 
-            List<GcodeFile> refreshed = new List<GcodeFile>();
-            foreach(GcodeFile gcodeFile in refreshed)
-                FoundFiles.Add(gcodeFile);
+            FindFiles();
             
             foreach(GcodeFile gcodeFile in SelectedFiles)
             {
@@ -155,10 +124,12 @@ namespace GcodeRenamer.ViewModels
             {
                 IsBusy = true;
 
-                string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancle", @"C:\...");
+                string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
                 //TODO Is valid route 
                 if(path != null)    
-                    await DirectoryPathService.AddItemAsync(new DirectoryPath { Path = path });
+                    await RouteService.AddItemAsync(new DirectoryPath { Path = path });
+
+                IsBusy = false;
             }
         }
 
@@ -168,17 +139,21 @@ namespace GcodeRenamer.ViewModels
             {
                 IsBusy = true;
 
-                IEnumerable<DirectoryPath> Paths = await DirectoryPathService.GetItemsAsync();
 
-                if (Paths.Count() == 0)
+                IEnumerable<DirectoryPath> Paths = await RouteService.GetItemsAsync();
+
+                if (Paths.Count() == 0 )
                 {
-                    await Shell.Current.DisplayAlert("Routes","There is no directory paths to search for files.", "Ok");
+                    IsBusy = false;
                     return;
                 }
 
-                foreach(GcodeFile gcodeFile in await FileService.GetGcodeFilesData(Paths))
-                    FoundFiles.Add(gcodeFile);
-                
+                foreach (GcodeFile gcodeFile in await FileService.GetGcodeFilesData(Paths))
+                {
+                    if(!FoundFiles.Any(x=>x.Name==gcodeFile.Name && x.DirectoryPath==gcodeFile.DirectoryPath) && !SelectedFiles.Any(x => x.Name==gcodeFile.Name && x.DirectoryPath==gcodeFile.DirectoryPath))
+                        FoundFiles.Add(gcodeFile);
+                }
+                IsBusy = false;
             }
         }
 
@@ -188,7 +163,7 @@ namespace GcodeRenamer.ViewModels
             {
                 IsBusy = true;
 
-                if (SelectedFiles.Count() != 0) 
+                if (SelectedFiles.Count() == 0) 
                 {
                     await Shell.Current.DisplayAlert("Files", "There is no files to convert.", "Ok");
                     return;
@@ -196,20 +171,19 @@ namespace GcodeRenamer.ViewModels
 
                 foreach (GcodeFile file in new List<GcodeFile>(SelectedFiles))
                 {
-                    //TODO
-                    string newName = "";
+                    string newName = FileNameCreator.CreateFileName(file, SelectedFilament.Data, SelectedFileForamat.Data);
 
                     bool isSuccesfull = await FileService.SaveGcodeFile(newName, file);
 
                     if (!isSuccesfull)
                     {
-                        await Shell.Current.DisplayAlert("Error occured", "Problems with changing " + file.Name + " file.", "Ok");
+                        //await Shell.Current.DisplayAlert("Error occured", "Problems with changing " + file.Name + " file.", "Ok");
                     }
                     else
                         SelectedFiles.Remove(file);
                     
                 }
-
+                IsBusy = false;
             }
         }
     }
