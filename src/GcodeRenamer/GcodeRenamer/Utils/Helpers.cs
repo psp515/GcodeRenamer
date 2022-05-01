@@ -11,10 +11,10 @@ namespace GcodeRenamer.Utils
     {
         public static List<PickerData<FilamentType>> Filaments = new List<PickerData<FilamentType>> 
         {
-            new PickerData<FilamentType> { Index = 0, Data = new FilamentType("PLA", 1.24) },
-            new PickerData<FilamentType> { Index = 1, Data = new FilamentType("PET-G", 1.23) },
-            new PickerData<FilamentType> { Index = 2, Data = new FilamentType("ASA", 1.07) },
-            new PickerData<FilamentType> { Index = 3, Data = new FilamentType("ABS", 1.04) }, 
+            new PickerData<FilamentType> { Index = 0, Data = new FilamentType("PLA", 1.24, 190, 220)  },
+            new PickerData<FilamentType> { Index = 1, Data = new FilamentType("PET-G", 1.23, 230, 250) },
+            new PickerData<FilamentType> { Index = 2, Data = new FilamentType("ASA", 1.07, 235, 255) },
+            new PickerData<FilamentType> { Index = 3, Data = new FilamentType("ABS", 1.04, 220, 250) }, 
         };
 
 
@@ -36,22 +36,30 @@ namespace GcodeRenamer.Utils
 
         public static List<PickerData<string>> WeightFormats = new List<PickerData<string>>
         {
-            new PickerData<string> { Index = 0, Data="x.xx kg" },
+            new PickerData<string> { Index = 0, Data="x,xx kg" },
             new PickerData<string> { Index = 1, Data="x g" },
         };
 
         public static List<PickerData<string>> TimeFormats = new List<PickerData<string>>
         {
             new PickerData<string> { Index = 0, Data="hh:mm:ss" },
-            new PickerData<string> { Index = 1, Data="hh " },
-            new PickerData<string> { Index = 2, Data="hh:mm "  },
+            new PickerData<string> { Index = 1, Data="hh" },
+            new PickerData<string> { Index = 2, Data="hh:mm"  },
         };
 
         public static List<PickerData<string>> LengthFormats = new List<PickerData<string>>
         {
-            new PickerData<string> { Index = 0, Data="x.xx m" },
-            new PickerData<string> { Index = 1, Data="x m " },
-            new PickerData<string> { Index = 2, Data="x.x m"  },
+            new PickerData<string> { Index = 0, Data="x,xx m" },
+            new PickerData<string> { Index = 1, Data="x,x m " },
+            new PickerData<string> { Index = 2, Data="x m"  },
         };
+
+
+        public static List<PickerData<string>> Radius = new List<PickerData<string>>
+        {
+            new PickerData<string> { Index = 0, Data="1.75 mm" },
+            new PickerData<string> { Index = 1, Data="2.85 mm" },
+        };
+
     }
 }

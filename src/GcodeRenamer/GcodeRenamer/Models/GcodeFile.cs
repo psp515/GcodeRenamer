@@ -12,11 +12,14 @@ namespace GcodeRenamer.Models
     public class GcodeFile
     {
         public string Name { get; set; }
-        public string Path { get; set; }
-        public FileInfo File { get; set; }
+        public string FilePath { get; set; }
+        public string DirectoryPath { get; set; }
 
+        public double Length { get; set; }
+        public int Seconds { get; set; }
 
-        //TODO
-        //Filament Prediction zgaduje jaki to moze byc filament uzyty do drukowania jaezeli sei nie zgadza to wypisuje uzytkownikowi ze moze miec zle skonfigurowany plik i wyswietla te dane uzytkownik akceptuje czy jest git czy nie jest git itd
+        public string[] FilamentPrdeictions { get; set; }
+        public int BedTemperature { get; set; }
+        public int FilamentTemperature { get; set; }
     }
 }

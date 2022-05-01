@@ -43,5 +43,11 @@ namespace GcodeRenamer.Utils
             get => Preferences.Get(nameof(LengthFormat), 0, nameof(Settings));
             set => Preferences.Set(nameof(LengthFormat), value, nameof(Settings));
         }
+
+        public static int Radius
+        {
+            get => Preferences.Get(nameof(Radius), 0, nameof(Settings));
+            set => Preferences.Set(nameof(Radius), value, nameof(Settings));
+        }
     }
 }

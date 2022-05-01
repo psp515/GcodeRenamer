@@ -92,13 +92,13 @@ namespace GcodeRenamer.ViewModels
 
             //DirectoryPathService.AddItemAsync(new DirectoryPath { Path = @"C:\Users\psp515\Desktop" });
 
-            SelectedFiles.Add(new GcodeFile { Path = @"C:\path\path", Name="Name" });
-            SelectedFiles.Add(new GcodeFile { Path = @"C:\path\path1", Name="Name1" });
-            SelectedFiles.Add(new GcodeFile { Path = @"C:\path\path2", Name="Name2" });
+            SelectedFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path", Name="Name" });
+            SelectedFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path1", Name="Name1" });
+            SelectedFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path2", Name="Name2" });
 
-            FoundFiles.Add(new GcodeFile { Path = @"C:\path\path3", Name="Name3" });
-            FoundFiles.Add(new GcodeFile { Path = @"C:\path\path4", Name="Name4" });
-            FoundFiles.Add(new GcodeFile { Path = @"C:\path\path5", Name="Name5" });
+            FoundFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path3", Name="Name3" });
+            FoundFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path4", Name="Name4" });
+            FoundFiles.Add(new GcodeFile { DirectoryPath = @"C:\path\path5", Name="Name5" });
 
             //FindFiles();
         }

@@ -35,12 +35,6 @@
                       Route="HomeView" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Help">
-        <ShellContent Title="Help"
-                      ContentTemplate="{DataTemplate local:HelpView}"
-                      Route="HelpView" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Settings">
         <ShellContent Title="Settings"
                       ContentTemplate="{DataTemplate local:SettingsView}"

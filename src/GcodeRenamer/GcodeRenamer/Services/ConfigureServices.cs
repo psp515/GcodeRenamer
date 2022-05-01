@@ -16,7 +16,7 @@ namespace GcodeRenamer.Services
 
             /* Implementation */
 #if WINDOWS
-            builder.Services.AddSingleton<IFileService, Platforms.Windows.Implementations.FilePickerWindowsService>();
+            builder.Services.AddSingleton<IFileService, Platforms.Windows.Implementations.FileWindowsService>();
 #endif
 
             builder.Services.TryAddTransient<FileService>();

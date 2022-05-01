@@ -34,7 +34,7 @@
                                            Text="{Binding Name}" />
 
                                     <Label Grid.Column="1"
-                                           Text="{Binding Path}" />
+                                           Text="{Binding DirectoryPath}" />
 
                                     <Button Grid.Column="2"
                                             Text="Add to staging"
@@ -96,7 +96,7 @@
                                            Text="{Binding Name}" />
 
                                     <Label Grid.Column="1"
-                                           Text="{Binding Path}" />
+                                           Text="{Binding DirectoryPath}" />
 
 
                                     <Button Grid.Column="2"

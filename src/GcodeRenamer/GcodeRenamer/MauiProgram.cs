@@ -2,6 +2,7 @@
 using GcodeRenamer.Models;
 using GcodeRenamer.Services;
 using GcodeRenamer.ViewModels;
+using GcodeRenamer.Views;
 
 namespace GcodeRenamer;
 
@@ -14,6 +15,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureServices()
 			.ConfigureViewModels()
+			.ConfigureViews()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
