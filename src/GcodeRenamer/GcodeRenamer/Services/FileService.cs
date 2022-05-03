@@ -32,7 +32,8 @@ namespace GcodeRenamer.Services
             List<GcodeFile> Files = new List<GcodeFile>();
 
             foreach (DirectoryPath directoryPath in directoryPaths)
-                    Files.AddRange(await GetGcodeFilesData(directoryPath.Path));
+                Files.AddRange(await GetGcodeFilesData(directoryPath.Path));
+
 
             return Files;
         }

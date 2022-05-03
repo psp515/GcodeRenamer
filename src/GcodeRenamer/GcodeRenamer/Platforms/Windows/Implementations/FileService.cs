@@ -14,6 +14,9 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
         {
             List<GcodeFile> Files = new List<GcodeFile>();
 
+            if (!Directory.Exists(directoryPath))
+                return Files;
+
             foreach (string filepath in Directory.GetFiles(directoryPath))
             {
                 FileInfo fileInfo = new FileInfo(filepath);

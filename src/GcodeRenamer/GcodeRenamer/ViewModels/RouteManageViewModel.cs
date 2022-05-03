@@ -41,12 +41,58 @@ namespace GcodeRenamer.ViewModels
 
         public async void RefreshCollection()
         {
+            if (IsBusy)
+                return;
+
             IsBusy = true;
             await Task.Delay(DELAY);
 
+            Paths.Clear();
+
+            foreach (DirectoryPath Route in await RouteService.GetItemsAsync())
+                Paths.Add(Route);
+
             IsBusy = false;
         }
-                
 
+
+        public async void AddRoute()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            await Task.Delay(DELAY);
+
+            
+
+            IsBusy = false;
+        }
+
+        public async void EdithRoute()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            await Task.Delay(DELAY);
+
+
+
+            IsBusy = false;
+        }
+
+        public async void DeleteRoute()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            await Task.Delay(DELAY);
+
+
+
+            IsBusy = false;
+        }
     }
 }
