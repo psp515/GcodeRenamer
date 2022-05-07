@@ -4,9 +4,8 @@
              x:Class="GcodeRenamer.HelpView"
              Shell.NavBarIsVisible="False"
              Title="HelpView">
-    <StackLayout>
-        <Label Text="Welcome to Help!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+    <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"
+                 Padding="40">
+
     </StackLayout>
 </ContentPage>
