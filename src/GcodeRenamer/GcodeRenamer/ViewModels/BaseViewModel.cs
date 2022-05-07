@@ -29,11 +29,12 @@ namespace GcodeRenamer.ViewModels
             if (handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
-        protected virtual bool SetProperty<T>(ref T backingStore, T value, string propertyName = "")
+        protected virtual bool SetProperty<T>(ref T backingStore, T value, string propertyName = "", Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
 
+            onChanged?.Invoke();
             backingStore = value;
             OnPropertyChanged(propertyName);
             return true;

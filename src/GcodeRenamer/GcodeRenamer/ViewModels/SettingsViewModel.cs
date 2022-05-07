@@ -21,16 +21,16 @@ namespace GcodeRenamer.ViewModels
 
 
         int selectedFileForamat, theme, selectedTimeFormat, selectedWeightFormat, selectedLengthFormat, selectedRadiusFormat;
-        public int SelectedFileForamatIndex { get => selectedFileForamat; set => SetProperty(ref selectedFileForamat, value); }
-        public int SelcetedThemeIndex { get => theme; set => SetProperty(ref theme,value); }
-        public int SelectedTimeFormatIndex { get => selectedTimeFormat; set => SetProperty(ref selectedTimeFormat, value); }
-        public int SelectedWeightFormatIndex { get => selectedWeightFormat; set => SetProperty(ref selectedWeightFormat, value); }
-        public int SelectedLengthFormatIndex { get => selectedLengthFormat; set => SetProperty(ref selectedLengthFormat, value); }
-        public int SelectedRadiusFormat { get => selectedRadiusFormat; set => SetProperty(ref selectedRadiusFormat, value); }
+        public int SelectedFileForamatIndex { get => selectedFileForamat; set => SetProperty(ref selectedFileForamat, value, "", UpdateSettings); }
+        public int SelcetedThemeIndex { get => theme; set => SetProperty(ref theme, value, "", UpdateSettings); }
+        public int SelectedTimeFormatIndex { get => selectedTimeFormat; set => SetProperty(ref selectedTimeFormat, value, "", UpdateSettings); }
+        public int SelectedWeightFormatIndex { get => selectedWeightFormat; set => SetProperty(ref selectedWeightFormat, value, "", UpdateSettings); }
+        public int SelectedLengthFormatIndex { get => selectedLengthFormat; set => SetProperty(ref selectedLengthFormat, value, "", UpdateSettings); }
+        public int SelectedRadiusFormat { get => selectedRadiusFormat; set => SetProperty(ref selectedRadiusFormat, value, "", UpdateSettings); }
 
 
         PickerData<FilamentType> selectedFilament;
-        public PickerData<FilamentType> SelectedFilament { get => selectedFilament; set => SetProperty(ref selectedFilament, value); }
+        public PickerData<FilamentType> SelectedFilament { get => selectedFilament; set => SetProperty(ref selectedFilament, value, "", UpdateSettings); }
 
         public Command UpdateSettingsCommand { get; }
 
@@ -57,11 +57,6 @@ namespace GcodeRenamer.ViewModels
             SelectedLengthFormatIndex = Settings.LengthFormat;
             SelectedWeightFormatIndex = Settings.WeightFormat;
             SelectedTimeFormatIndex = Settings.TimeFormat;
-        }
-
-        protected internal void OnDisappearing()
-        {
-            //UpdateSettings();
         }
 
         private async void UpdateSettings()
