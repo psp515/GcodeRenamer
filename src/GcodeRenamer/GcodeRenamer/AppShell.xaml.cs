@@ -1,4 +1,6 @@
-﻿namespace GcodeRenamer;
+﻿using GcodeRenamer.Utils;
+
+namespace GcodeRenamer;
 public partial class AppShell : Shell
 {
     public AppShell()
@@ -6,8 +8,9 @@ public partial class AppShell : Shell
         InitializeComponent();
     }
 
-    private void MenuFlyoutItem_Clicked(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-
+        base.OnAppearing();
+        InjectSettings.SetTheme();
     }
 }

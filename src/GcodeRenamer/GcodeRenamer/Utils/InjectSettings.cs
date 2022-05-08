@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GcodeRenamer.Utils
 {
-    public class Theme
+    public class InjectSettings
     {
         public static void SetTheme()
         {

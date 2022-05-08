@@ -1,4 +1,5 @@
 ﻿using GcodeRenamer.Services;
+using GcodeRenamer.Utils;
 using GcodeRenamer.ViewModels;
 using GcodeRenamer.Views;
 
@@ -20,9 +21,6 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-
-		//DependencyInjcetion ToDo bo nie działa jakies dziwne problmey
-
-        return builder.Build();
+		return builder.Build();
 	}
 }

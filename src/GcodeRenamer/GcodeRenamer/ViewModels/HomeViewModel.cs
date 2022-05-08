@@ -61,9 +61,6 @@ namespace GcodeRenamer.ViewModels
             RefreshCollectionCommand = new Command(RefreshCollection);
         }
 
-
-
-
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
@@ -73,7 +70,6 @@ namespace GcodeRenamer.ViewModels
 
             FindFiles();
         }
-
 
         private async void RefreshCollection()
         {
@@ -85,7 +81,11 @@ namespace GcodeRenamer.ViewModels
             SelectedFiles.Clear();
 
             IsBusy = false;
-            FindFiles();
+            IEnumerable<DirectoryPath> Paths = await RouteService.GetItemsAsync();
+
+            foreach (GcodeFile gcodeFile in await FileService.GetGcodeFilesData(Paths))
+                FoundFiles.Add(gcodeFile);
+            
 
             IsBusy = false;
         }
@@ -111,7 +111,6 @@ namespace GcodeRenamer.ViewModels
 
             IsBusy = false;
         }
-
         private async void AddRoute()
         {
             if (!IsBusy)
@@ -119,8 +118,16 @@ namespace GcodeRenamer.ViewModels
                 IsBusy = true;
 
                 string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-                //TODO Is valid route 
-                if(path != null)    
+
+                if (!Validation.IsPath(path))
+                {
+                    await Shell.Current.DisplayAlert("Invalid path", "Invalid path.", "OK");
+
+                    IsBusy = false;
+                    return;
+                }
+
+                if(path != null)  
                     await RouteService.AddItemAsync(new DirectoryPath { Path = path });
 
                 IsBusy = false;
@@ -131,8 +138,10 @@ namespace GcodeRenamer.ViewModels
         {
             if (!IsBusy)
             {
-                IsBusy = true;
+                //TODO Loading Dialog
+                await Task.Delay(DELAY);
 
+                IsBusy = true;
 
                 IEnumerable<DirectoryPath> Paths = await RouteService.GetItemsAsync();
 
@@ -156,28 +165,33 @@ namespace GcodeRenamer.ViewModels
             if (!IsBusy)
             {
                 IsBusy = true;
+                //TODO Loading Dialog
+
+                await Task.Delay(DELAY);
 
                 if (SelectedFiles.Count() == 0) 
                 {
-                    await Shell.Current.DisplayAlert("Files", "There is no files to convert.", "Ok");
+                    await Shell.Current.DisplayAlert("Files", "There are no files to convert.", "Ok");
                     IsBusy = false;
                     return;
                 }
 
-                foreach (GcodeFile file in new List<GcodeFile>(SelectedFiles))
+                int counter = 0;
+                List<GcodeFile> GcodeFiles = new List<GcodeFile>(SelectedFiles);
+                foreach (GcodeFile file in GcodeFiles)
                 {
                     string newName = FileNameCreator.CreateFileName(file, SelectedFilament.Data, SelectedFileForamat.Data);
-
                     bool isSuccesfull = await FileService.SaveGcodeFile(newName, file);
-
-                    if (!isSuccesfull)
+                    if (isSuccesfull) 
                     {
-                        //await Shell.Current.DisplayAlert("Error occured", "Problems with changing " + file.Name + " file.", "Ok");
-                    }
-                    else
+                        ++counter;
                         SelectedFiles.Remove(file);
-                    
+                    }
                 }
+
+                if (counter != GcodeFiles.Count)
+                    await Shell.Current.DisplayAlert("Some errors occured", $"Some files was not converted ({counter}/{GcodeFiles.Count} succesfull).", "OK");
+
                 IsBusy = false;
             }
         }

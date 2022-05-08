@@ -72,7 +72,7 @@ namespace GcodeRenamer.ViewModels
             Settings.LengthFormat = SelectedLengthFormatIndex;
             Settings.Radius = SelectedRadiusFormat;
 
-            Theme.SetTheme();
+            InjectSettings.SetTheme();
 
             IsBusy = false;
         }
