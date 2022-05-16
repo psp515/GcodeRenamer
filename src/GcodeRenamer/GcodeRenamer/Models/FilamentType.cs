@@ -12,6 +12,8 @@ namespace GcodeRenamer.Models
         {
             this.Type = type;
             this.Density = density;
+            this.HighTemperatureRange = 0;
+            this.LowTemperatureRange = 0;
         }
 
         public FilamentType(string type, double density, int lowTemperatureRange, int highTemperatureRange)
