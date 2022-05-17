@@ -62,7 +62,7 @@ namespace GcodeRenamer.ViewModels
         private async void UpdateSettings()
         {
             IsBusy = true;
-
+            /*
             Settings.Filament = SelectedFilament.Index;
             Settings.Theme = SelcetedThemeIndex;
             Settings.FileForamat = SelectedFileForamatIndex;
@@ -71,7 +71,7 @@ namespace GcodeRenamer.ViewModels
             Settings.WeightFormat = SelectedWeightFormatIndex;
             Settings.LengthFormat = SelectedLengthFormatIndex;
             Settings.Radius = SelectedRadiusFormat;
-
+            */
             InjectSettings.SetTheme();
 
             IsBusy = false;

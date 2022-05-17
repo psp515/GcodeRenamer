@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GcodeRenamer.HelpView"
-             Shell.NavBarIsVisible="False"
-             Title="HelpView">
+             x:Class="GcodeRenamer.HelpView">
     <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"
                  Padding="40">
 

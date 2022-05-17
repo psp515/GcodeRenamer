@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GcodeRenamer.Views.FilamentType.ManageFilamentTypeView"
+             Shell.PresentationMode="ModalAnimated">
+    <StackLayout Style="{StaticResource BaseStackLayout}">
+
+        <HorizontalStackLayout>
+
+            <Button Style="{StaticResource CollectionViewButton}"
+                    Text="Back" />
+
+            <Label Style="{StaticResource TitleLabel}"
+                   Text="Filament Type " />
+            
+        </HorizontalStackLayout>
+
+        <Frame Style="{StaticResource CollectionViewFrame}"
+               Margin="40">
+            <StackLayout>
+
+                <Label Style="{StaticResource MediumLabel}"
+                       Text="Type Name" />
+                <Entry Text="{Binding FilamentType.Type}" />
+
+                <Label Style="{StaticResource MediumLabel}"
+                       Text="Density" />
+                <Entry Text="{Binding FilamentType.Density}"
+                       Keyboard="Numeric" />
+
+                <Label Style="{StaticResource MediumLabel}"
+                       Text="Temperature Range Low" />
+                <Entry Text="{Binding FilamentType.LowTemperatureRange}"
+                       Keyboard="Numeric" />
+
+                <Label Style="{StaticResource MediumLabel}"
+                       Text="Temperature Range High" />
+                <Entry Text="{Binding FilamentType.HighTemperatureRange}"
+                       Keyboard="Numeric" />
+
+                <Button Style="{StaticResource CollectionViewButton}"
+                        Text="{Binding ButtonText}" />
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

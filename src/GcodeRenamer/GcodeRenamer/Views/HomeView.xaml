@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:GcodeRenamer.Models"
              xmlns:viewmodels="clr-namespace:GcodeRenamer.ViewModels"
+             xmlns:home="clr-namespace:GcodeRenamer"
              x:Class="GcodeRenamer.HomeView"
              Shell.NavBarIsVisible="False"
              Title="HomeView">
@@ -10,8 +11,186 @@
 
 
 
-    <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}"
-                 Padding="40">
+    <StackLayout Style="{StaticResource BaseStackLayout}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="0.95*" />
+            </Grid.RowDefinitions>
+
+            <Label Style="{StaticResource TitleLabel}"
+                   Grid.ColumnSpan="2"
+                   Text="Gcode Files" />
+
+            <RefreshView Grid.Column="0"
+                         Grid.Row="1"
+                         Command="{Binding RefreshCollectionCommand}"
+                         CommandParameter="{Binding .}">
+                <CollectionView ItemsSource="{Binding FoundFiles}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:GcodeFile">
+                            <StackLayout>
+                                <Frame Style="{StaticResource CollectionViewFrame}">
+                                    <Grid HeightRequest="40">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.5*" />
+                                            <RowDefinition  Height="0.5*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.25*" />
+                                            <ColumnDefinition Width="0.25*" />
+                                            <ColumnDefinition Width="0.15*" />
+                                            <ColumnDefinition Width="0.05*" />
+                                            <ColumnDefinition Width="0.35*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Style="{StaticResource MediumLabel}"
+                                               Text="{Binding FileName, StringFormat='File name: {0}'}" />
+
+                                        <Label Style="{StaticResource MediumLabel}"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Text="{Binding DirectoryPath, StringFormat='Dir path: {0}'}" />
+
+                                        <Label Style="{StaticResource MediumLabel}"
+                                               Grid.Row="0"
+                                               Grid.Column="2"
+                                               Text="{Binding BedTemperature, StringFormat='Bed: {0} °C'}" />
+
+                                        <Label Style="{StaticResource MediumLabel}"
+                                               Grid.Row="1"
+                                               Grid.Column="2"
+                                               Text="{Binding FilamentTemperature, StringFormat='Hotend: {0} °C'}" />
+
+                                        <Button Style="{StaticResource CollectionViewButton}"
+                                                Command="{Binding AddToStagingCommand, Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}"
+                                                CommandParameter="{Binding .}"
+                                                WidthRequest="200"
+                                                Grid.Column="4"
+                                                Grid.RowSpan="2"
+                                                Text="Add to staging" />
+
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <CollectionView ItemsSource="{Binding SelectedFiles}"
+                            Grid.Column="1"
+                            Grid.Row="1">
+
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Frame Style="{StaticResource CollectionViewFrame}" HeightRequest="140" Padding="15,4,15,4">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.5*" />
+                                    <RowDefinition Height="0.5*" />
+                                </Grid.RowDefinitions>
+
+                                <Button Style="{StaticResource CollectionViewButton}"
+                                        Grid.Row="0"
+                                        Text="Convert Selected Files"
+                                        WidthRequest="200"
+                                        FontSize="16"
+                                        FontAttributes="Bold"
+                                        CornerRadius="30"
+                                        HorizontalOptions="Center"
+                                        HeightRequest="60"
+                                        Command="{Binding ConvertFilesCommand, Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
+
+                                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="50" Grid.Row="1">
+                                    
+                                    <Picker ItemsSource="{Binding Filaments}"
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            WidthRequest="180"
+                                            Title="Filament type"
+                                            ItemDisplayBinding="{Binding Data.Type}"
+                                            SelectedItem="{Binding SelectedFilament}" />
+
+                                    <Picker ItemsSource="{Binding FileFormats}"
+                                            WidthRequest="180"
+                                            Title="Format"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            ItemDisplayBinding="{Binding Data}"
+                                            SelectedItem="{Binding SelectedFileForamat}" />
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame Style="{StaticResource CollectionViewFrame}">
+                                <Grid HeightRequest="40">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*" />
+                                        <RowDefinition  Height="0.5*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="0.25*" />
+                                        <ColumnDefinition Width="0.15*" />
+                                        <ColumnDefinition Width="0.05*" />
+                                        <ColumnDefinition Width="0.35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Style="{StaticResource MediumLabel}"
+                                           Text="{Binding FileName, StringFormat='File name: {0}'}" />
+
+                                    <Label Style="{StaticResource MediumLabel}"
+                                           Grid.Row="1"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding DirectoryPath, StringFormat='Dir path: {0}'}" />
+
+                                    <Label Style="{StaticResource MediumLabel}"
+                                           Grid.Row="0"
+                                           Grid.Column="2"
+                                           Text="{Binding BedTemperature, StringFormat='Bed: {0} °C'}" />
+
+                                    <Label Style="{StaticResource MediumLabel}"
+                                           Grid.Row="1"
+                                           Grid.Column="2"
+                                           Text="{Binding FilamentTemperature, StringFormat='Hotend: {0} °C'}" />
+
+                                    <Button Style="{StaticResource CollectionViewButton}"
+                                            Command="{Binding RemoveFromStagingCommand, Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}"
+                                            CommandParameter="{Binding .}"
+                                            WidthRequest="200"
+                                            Grid.Column="4"
+                                            Grid.RowSpan="2"
+                                            Text="Remove from staging" />
+
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
     </StackLayout>
 </ContentPage>

@@ -3,8 +3,10 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:GcodeRenamer"
+       xmlns:view="clr-namespace:GcodeRenamer.Views"
+       xmlns:filament="clr-namespace:GcodeRenamer.Views.FilamentType"
        Shell.NavBarIsVisible="False"
-       Shell.FlyoutBehavior="Flyout">
+       Shell.FlyoutBehavior="Locked">
 
    
 
@@ -18,6 +20,8 @@
         </Grid>
     </Shell.FlyoutHeader>
 
+
+
     <Shell.FlyoutFooter>
         <Grid>
             <Label Text="Footer"
@@ -30,26 +34,27 @@
 
 
     <FlyoutItem Title="Home">
-        <ShellContent Title="Home"
-                      ContentTemplate="{DataTemplate local:HomeView}"
+        <ShellContent ContentTemplate="{DataTemplate local:HomeView}"
                       Route="HomeView" />
     </FlyoutItem>
 
     <FlyoutItem Title="Route Manager">
-        <ShellContent Title="Route Manager"
-                      ContentTemplate="{DataTemplate local:RouteManageView}"
+        <ShellContent ContentTemplate="{DataTemplate local:RouteManageView}"
                       Route="RouteManageView" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Filament Type Manager">
+        <ShellContent ContentTemplate="{DataTemplate filament:FilamentTypesView}"
+                      Route="FilamentTypesView" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Help">
-        <ShellContent Title="Help"
-                      ContentTemplate="{DataTemplate local:HelpView}"
+        <ShellContent ContentTemplate="{DataTemplate local:HelpView}"
                       Route="HelpView" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings">
-        <ShellContent Title="Settings"
-                      ContentTemplate="{DataTemplate local:SettingsView}"
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsView}"
                       Route="SettingsView" />
     </FlyoutItem>
 

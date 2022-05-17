@@ -1,17 +1,11 @@
-﻿using GcodeRenamer.Services;
-using GcodeRenamer.Utils;
-using GcodeRenamer.ViewModels;
-using GcodeRenamer.Views;
-
-namespace GcodeRenamer;
+﻿namespace GcodeRenamer;
 
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+		builder.UseMauiApp<App>()
 			.ConfigureServices()
 			.ConfigureViewModels()
 			.ConfigureViews()

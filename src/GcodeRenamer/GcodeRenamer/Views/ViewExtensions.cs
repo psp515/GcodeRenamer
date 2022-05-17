@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace GcodeRenamer.Views
 {
@@ -14,6 +10,8 @@ namespace GcodeRenamer.Views
             builder.Services.AddSingleton<HelpView>();
             builder.Services.AddSingleton<SettingsView>();
             builder.Services.AddSingleton<RouteManageView>();
+            builder.Services.AddSingleton<FilamentTypesView>();
+            builder.Services.AddSingleton<ManageFilamentTypeView>();
 
             return builder;
         }

@@ -9,25 +9,14 @@ using System.Threading.Tasks;
 
 namespace GcodeRenamer.Services
 {
-    //TODO Inicjalizacja jak Transient
-    public class FilamentService : IService<DirectoryPath>
+    public class FilamentService : BaseService, IService<FilamentType>
     {
         const string dbName = "routes";
-        SQLiteAsyncConnection db;
 
-        public FilamentService()
+        public async Task AddItemAsync(FilamentType item)
         {
-            Task.Run(() => {
-                if (db == null)
-                {
-                    db = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, dbName));
-                    await db.CreateTableAsync<DirectoryPath>();
-                }
-            });
-        }
+            await ConnectToDatabase<FilamentType>(dbName);
 
-        public async Task AddItemAsync(DirectoryPath item)
-        {
             if (item==null)
                 return;
 
@@ -36,32 +25,40 @@ namespace GcodeRenamer.Services
 
         public async Task DeleteAllAsync()
         {
-            await db.DropTableAsync<DirectoryPath>();
+            await ConnectToDatabase<FilamentType>(dbName);
+            await db.DropTableAsync<FilamentType>();
         }
 
         public async Task DeleteItemAsync(int id)
         {
             if (id == null)
                 return;
-                
-            await db.DeleteAsync<DirectoryPath>(id);
+
+            await ConnectToDatabase<FilamentType>(dbName);
+            await db.DeleteAsync<FilamentType>(id);
         }
 
-        public async Task<DirectoryPath> GetItemAsync(int id)
+        public async Task<FilamentType> GetItemAsync(int id)
         {
-            return await db.Table<DirectoryPath>().FirstOrDefaultAsync(c => c.Id == id);
+            if (id == null)
+                return null;
+
+            await ConnectToDatabase<FilamentType>(dbName);
+            return await db.Table<FilamentType>().FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<IEnumerable<DirectoryPath>> GetItemsAsync()
+        public async Task<IEnumerable<FilamentType>> GetItemsAsync()
         {
-            return await db.Table<DirectoryPath>().ToListAsync();
+            await ConnectToDatabase<FilamentType>(dbName);
+            return await db.Table<FilamentType>().ToListAsync();
         }
 
-        public async Task UpdateItemAsync(DirectoryPath item)
+        public async Task UpdateItemAsync(FilamentType item)
         {
             if (item.Id == null)
                 return;
 
+            await ConnectToDatabase<FilamentType>(dbName);
             await db.UpdateAsync(item);
         }
     }

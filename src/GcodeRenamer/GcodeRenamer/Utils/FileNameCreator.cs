@@ -20,7 +20,7 @@ namespace GcodeRenamer.Utils
                 switch (item)
                 {
                     case "name":
-                        newName += "-" + file.Name;
+                        newName += "-" + file.FileName;
                         break;
                     case "time":
                         newName += "-" + GetTime(file.Seconds);

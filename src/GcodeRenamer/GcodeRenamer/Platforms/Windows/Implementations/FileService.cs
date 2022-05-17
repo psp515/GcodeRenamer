@@ -74,7 +74,7 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
 
                     Files.Add(new GcodeFile()
                     {
-                        Name = fileInfo.Name.Replace(".gcode", ""),
+                        FileName = fileInfo.Name.Replace(".gcode", ""),
                         FilePath = fileInfo.FullName,
                         DirectoryPath = fileInfo.DirectoryName,
 

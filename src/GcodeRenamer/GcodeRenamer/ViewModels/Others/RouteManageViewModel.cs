@@ -105,10 +105,11 @@ namespace GcodeRenamer.ViewModels
             IsBusy = true;
 
 
-            if (await GetBoolFromUser("Do you want to delete this item?"))
+            if (await GetBoolFromUser("Delete path","Do you want to delete this path?"))
             {
                 await Task.Delay(DELAY);
                 await RouteService.DeleteItemAsync(directoryPath.Id);
+                Paths.Remove(directoryPath);
             }
 
             IsBusy = false;

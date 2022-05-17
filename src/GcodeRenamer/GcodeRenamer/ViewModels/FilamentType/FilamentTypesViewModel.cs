@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace GcodeRenamer.ViewModels
 {
-    public class FilamentsViewModel : BaseViewModel
+    public class FilamentTypesViewModel : BaseViewModel
     {
 
-        public ObservableCollection<DirectoryPath> FilamentType;
+        public ObservableCollection<FilamentType> FilamentTypes;
 
         FilamentService FilamentService;
 
@@ -23,24 +23,24 @@ namespace GcodeRenamer.ViewModels
 
 
 
-        public FilamentsViewModel(FilamentService filamentService)
+        public FilamentTypesViewModel(FilamentService filamentService)
         {
-            FilamentType = new ObservableCollection<DirectoryPath>();
+            FilamentTypes = new ObservableCollection<FilamentType>();
             FilamentService = filamentService;
 
             RefreshCollectionCommand = new Command(RefreshCollection);
-            AddRouteCommand = new Command(AddRoute);
-            DeleteRouteCommand = new Command<DirectoryPath>(DeleteRoute);
-            EditRouteCommand = new Command<DirectoryPath>(EditRoute);
+            AddFilamentTypeCommand = new Command(AddFilament);
+            DeleteFilamentTypeCommand = new Command<FilamentType>(DeleteRoute);
+            EditFilamentTypeCommand = new Command<FilamentType>(EditFilament);
         }
 
         protected internal override async void OnAppearing()
         {
             base.OnAppearing();
 
-            foreach (DirectoryPath path in await FilamentService.GetItemsAsync())
-                if (!Paths.Any(x => x.Id == path.Id))
-                    Paths.Add(path);
+            foreach (FilamentType filament in await FilamentService.GetItemsAsync())
+                if (!FilamentTypes.Any(x => x.Id == filament.Id))
+                    FilamentTypes.Add(filament);
 
         }
 
@@ -52,16 +52,26 @@ namespace GcodeRenamer.ViewModels
             IsBusy = true;
             await Task.Delay(DELAY);
 
-            Paths.Clear();
+            FilamentTypes.Clear();
 
-            foreach (DirectoryPath Route in await FilamentService.GetItemsAsync())
-                Paths.Add(Route);
+            foreach (FilamentType filamentType in await FilamentService.GetItemsAsync())
+                FilamentTypes.Add(filamentType);
 
             IsBusy = false;
         }
 
 
-        public async void AddRoute()
+        public async void AddFilament()
+        {
+            if (IsBusy)
+                return;
+
+            await Shell.Current.GoToAsync(nameof(ManageFilamentTypeView));
+
+            IsBusy = false;
+        }
+
+        public async void EditFilament(FilamentType filamentType)
         {
             if (IsBusy)
                 return;
@@ -69,35 +79,12 @@ namespace GcodeRenamer.ViewModels
             IsBusy = true;
             await Task.Delay(DELAY);
 
-            string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-            if (path != null || path == "Cancel")
-                return;
-
-            await FilamentService.AddItemAsync();
+            await Shell.Current.GoToAsync(nameof(ManageFilamentTypeView)+$"?Id={filamentType.Id}");
 
             IsBusy = false;
         }
 
-        public async void EditRoute(DirectoryPath directoryPath)
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            await Task.Delay(DELAY);
-
-            string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-            if (path != null || path == "Cancel" || path == directoryPath.Path)
-                return;
-
-            directoryPath.Path = path;
-
-            await RouteService.UpdateItemAsync(directoryPath);
-
-            IsBusy = false;
-        }
-
-        public async void DeleteRoute(DirectoryPath directoryPath)
+        public async void DeleteRoute(FilamentType filamentType)
         {
             if (IsBusy)
                 return;
@@ -105,10 +92,12 @@ namespace GcodeRenamer.ViewModels
             IsBusy = true;
 
 
-            if (await GetBoolFromUser("Do you want to delete this item?"))
+            if (await GetBoolFromUser("Delete Filament", "Do you want to delete this item?"))
             {
                 await Task.Delay(DELAY);
-                await RouteService.DeleteItemAsync(directoryPath.Id);
+                await FilamentService.DeleteItemAsync(filamentType.Id);
+
+                FilamentTypes.Remove(filamentType);
             }
 
             IsBusy = false;

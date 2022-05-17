@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppTheme = GcodeRenamer.Models.AppTheme;
 
 namespace GcodeRenamer.Utils
 {
@@ -10,14 +6,14 @@ namespace GcodeRenamer.Utils
     {
         public static void SetTheme()
         {
-            switch (Settings.Theme)
+            switch (1)//Settings.Theme)
             {
                 default:
                 case (int)AppTheme.Light:
-                    App.Current.UserAppTheme = AppTheme.Light;
+                    App.Current.UserAppTheme = (Microsoft.Maui.ApplicationModel.AppTheme)AppTheme.Light;
                     break;
                 case (int)AppTheme.Dark:
-                    App.Current.UserAppTheme = AppTheme.Dark;
+                    App.Current.UserAppTheme = (Microsoft.Maui.ApplicationModel.AppTheme)AppTheme.Dark;
                     break;
             }
         }
