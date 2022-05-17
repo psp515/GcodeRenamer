@@ -4,11 +4,7 @@
              xmlns:models="clr-namespace:GcodeRenamer.Models"
              xmlns:viewmodels="clr-namespace:GcodeRenamer.ViewModels"
              xmlns:home="clr-namespace:GcodeRenamer"
-             x:Class="GcodeRenamer.HomeView"
-             Shell.NavBarIsVisible="False"
-             Title="HomeView">
-
-
+             x:Class="GcodeRenamer.HomeView">
 
 
     <StackLayout Style="{StaticResource BaseStackLayout}">

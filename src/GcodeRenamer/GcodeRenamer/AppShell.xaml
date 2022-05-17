@@ -5,57 +5,57 @@
        xmlns:local="clr-namespace:GcodeRenamer"
        xmlns:view="clr-namespace:GcodeRenamer.Views"
        xmlns:filament="clr-namespace:GcodeRenamer.Views.FilamentType"
+       xmlns:sys="clr-namespace:System;assembly=netstandard"
        Shell.NavBarIsVisible="False"
        Shell.FlyoutBehavior="Locked">
 
-   
-
     <Shell.FlyoutHeader>
-        <Grid>
-            <Label Text="Icon"
-                   HeightRequest="142"
-                   VerticalOptions="Center"
-                   WidthRequest="230"
-                   HorizontalOptions="Center" />
-        </Grid>
+        <StackLayout>
+            <Frame Style="{StaticResource CollectionViewFrame}"
+                   CornerRadius="30"
+                   HeightRequest="200">
+                <!-- ikonka -->
+            </Frame>
+        </StackLayout>
     </Shell.FlyoutHeader>
 
-
-
     <Shell.FlyoutFooter>
-        <Grid>
-            <Label Text="Footer"
-                   HeightRequest="142"
-                   VerticalOptions="Center"
-                   WidthRequest="230"
+
+        <StackLayout HeightRequest="60"
+                     BackgroundColor="{AppThemeBinding Dark={StaticResource SecondaryDark},Light= {StaticResource Secondary}}">
+            <Label Style="{StaticResource MediumLabel}"
+                   Margin="0,5,0,0"
+                   Text="Gcode Renamer"
+                   FontAttributes="Bold"
                    HorizontalOptions="Center" />
-        </Grid>
+            <Label Style="{StaticResource MediumLabel}"
+                   Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:dddd, dd/MM/yyyy}'}"
+                   HorizontalOptions="Center" />
+        </StackLayout>
     </Shell.FlyoutFooter>
 
 
-    <FlyoutItem Title="Home">
-        <ShellContent ContentTemplate="{DataTemplate local:HomeView}"
-                      Route="HomeView" />
-    </FlyoutItem>
 
-    <FlyoutItem Title="Route Manager">
-        <ShellContent ContentTemplate="{DataTemplate local:RouteManageView}"
-                      Route="RouteManageView" />
-    </FlyoutItem>
+    <ShellContent ContentTemplate="{DataTemplate local:HomeView}"
+                  Title="Home"
+                  Route="HomeView" />
 
-    <FlyoutItem Title="Filament Type Manager">
-        <ShellContent ContentTemplate="{DataTemplate filament:FilamentTypesView}"
-                      Route="FilamentTypesView" />
-    </FlyoutItem>
+    <ShellContent ContentTemplate="{DataTemplate local:RouteManageView}"
+                  Title="Route Manager"
+                  Route="RouteManageView" />
 
-    <FlyoutItem Title="Help">
-        <ShellContent ContentTemplate="{DataTemplate local:HelpView}"
-                      Route="HelpView" />
-    </FlyoutItem>
+    <ShellContent ContentTemplate="{DataTemplate filament:FilamentTypesView}"
+                  Title="Filament Type Manager"
+                  Route="FilamentTypesView" />
 
-    <FlyoutItem Title="Settings">
-        <ShellContent ContentTemplate="{DataTemplate local:SettingsView}"
-                      Route="SettingsView" />
-    </FlyoutItem>
+
+    <ShellContent ContentTemplate="{DataTemplate local:HelpView}"
+                  Title="Help"
+                  Route="HelpView" />
+
+    <ShellContent ContentTemplate="{DataTemplate local:SettingsView}"
+                  Title="Settings"
+                  Route="SettingsView" />
+
 
 </Shell>

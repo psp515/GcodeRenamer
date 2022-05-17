@@ -12,11 +12,10 @@ namespace GcodeRenamer.ViewModels
     public class FilamentTypesViewModel : BaseViewModel
     {
 
-        public ObservableCollection<FilamentType> FilamentTypes;
+        public ObservableCollection<FilamentType> FilamentTypes { get; set; }
 
         FilamentService FilamentService;
 
-        public Command RefreshCollectionCommand { get; set; }
         public Command AddFilamentTypeCommand { get; set; }
         public Command<FilamentType> DeleteFilamentTypeCommand { get; set; }
         public Command<FilamentType> EditFilamentTypeCommand { get; set; }
@@ -28,7 +27,6 @@ namespace GcodeRenamer.ViewModels
             FilamentTypes = new ObservableCollection<FilamentType>();
             FilamentService = filamentService;
 
-            RefreshCollectionCommand = new Command(RefreshCollection);
             AddFilamentTypeCommand = new Command(AddFilament);
             DeleteFilamentTypeCommand = new Command<FilamentType>(DeleteRoute);
             EditFilamentTypeCommand = new Command<FilamentType>(EditFilament);
@@ -43,23 +41,6 @@ namespace GcodeRenamer.ViewModels
                     FilamentTypes.Add(filament);
 
         }
-
-        public async void RefreshCollection()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            await Task.Delay(DELAY);
-
-            FilamentTypes.Clear();
-
-            foreach (FilamentType filamentType in await FilamentService.GetItemsAsync())
-                FilamentTypes.Add(filamentType);
-
-            IsBusy = false;
-        }
-
 
         public async void AddFilament()
         {

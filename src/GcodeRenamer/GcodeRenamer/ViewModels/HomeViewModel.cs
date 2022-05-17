@@ -38,7 +38,7 @@ namespace GcodeRenamer.ViewModels
             FoundFiles = new ObservableCollection<GcodeFile>();
             SelectedFiles = new ObservableCollection<GcodeFile>();
 
-            Filaments = Helpers.Filaments;
+            Filaments = Helpers.PickerFilaments;
             FileFormats = Helpers.FileForamts;
 
             FindFilesCommand = new Command(FindFiles);

@@ -2,9 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:GcodeRenamer.Models"
-             xmlns:viewmodels="clr-namespace:GcodeRenamer.ViewModels"
+             xmlns:viewmodels="clr-namespace:GcodeRenamer.ViewModels.Others"
              x:Class="GcodeRenamer.RouteManageView">
-    <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Tetruary}, Dark={StaticResource TetruaryDark}}" Padding="40">
 
+    <StackLayout Style="{StaticResource BaseStackLayout}"
+                 Padding="40">
+
+        <Label Style="{StaticResource TitleLabel}"
+               Text="Folder Paths" />
+
+        <CollectionView Margin="0,30,0,0"
+                        ItemsSource="{Binding DirectoriesPaths}"
+                        WidthRequest="700"
+                        HorizontalOptions="Start"
+                        Footer="{Binding .}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DirectoryPath">
+                    <StackLayout HeightRequest="50"
+                                 WidthRequest="600"
+                                 HorizontalOptions="FillAndExpand">
+                        <Frame Style="{StaticResource CollectionViewFrame}"
+                               HorizontalOptions="FillAndExpand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Style="{StaticResource MediumLabel}"
+                                       Text="{Binding Path, StringFormat='Directory Path: {0}' }" />
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.FooterTemplate>
+                <DataTemplate>
+                    <StackLayout HeightRequest="50"
+                                 WidthRequest="600"
+                                 HorizontalOptions="FillAndExpand">
+                        <Frame Style="{StaticResource CollectionViewFrame}"
+                               HorizontalOptions="FillAndExpand">
+                            <StackLayout>
+                                <Label Style="{StaticResource MediumLabel}"
+                                       Text="+" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.FooterTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>

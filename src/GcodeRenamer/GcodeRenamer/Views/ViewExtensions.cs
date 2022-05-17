@@ -11,7 +11,7 @@ namespace GcodeRenamer.Views
             builder.Services.AddSingleton<SettingsView>();
             builder.Services.AddSingleton<RouteManageView>();
             builder.Services.AddSingleton<FilamentTypesView>();
-            builder.Services.AddSingleton<ManageFilamentTypeView>();
+            builder.Services.AddTransient<ManageFilamentTypeView>();
 
             return builder;
         }

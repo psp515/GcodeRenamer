@@ -47,7 +47,6 @@
 
 	<ItemGroup>
 	  <None Include="..\.editorconfig" Link=".editorconfig" />
-	  <None Remove="ViewModels\FilamentType\ManageFilamentTypeViewModel\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,10 +54,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\FilamentType\FilamentTypesView.xaml">
+	  <MauiXaml Update="Views\FilamentTypeViews\FilamentTypesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\FilamentType\ManageFilamentTypeView.xaml">
+	  <MauiXaml Update="Views\FilamentTypeViews\ManageFilamentTypeView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HelpView.xaml">
@@ -73,14 +72,6 @@
 	  <MauiXaml Update="Views\SettingsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Remove="ViewModels\FilamentType\ManageFilamentTypeViewModel\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Remove="ViewModels\FilamentType\ManageFilamentTypeViewModel\**" />
 	</ItemGroup>
 
 </Project>
