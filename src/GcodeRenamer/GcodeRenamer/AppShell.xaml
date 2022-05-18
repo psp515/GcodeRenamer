@@ -13,8 +13,8 @@
             <Frame Style="{StaticResource CollectionViewFrame}"
                    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDarkHT},Light= {StaticResource PrimaryHT}}"
                    CornerRadius="30"
-                   HeightRequest="200">
-                <!-- ikonka -->
+                   HeightRequest="240">
+                <Image Source="edit.png" HeightRequest="230" WidthRequest="230" />
             </Frame>
         </StackLayout>
     </Shell.FlyoutHeader>
@@ -36,22 +36,19 @@
 
 
 
-    <FlyoutItem Title="Home">
+    <FlyoutItem Title="Home" Icon="home.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:HomeView}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Route Manager">
+    <FlyoutItem Title="Route Manager"
+                Icon="search.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:RouteManageView}" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Help">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:HelpView}" />
-        </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Settings">
+    <FlyoutItem Title="Settings"
+                Icon="settings.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:SettingsView}" />
         </Tab>

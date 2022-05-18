@@ -7,7 +7,6 @@ namespace GcodeRenamer.Views
         public static MauiAppBuilder ConfigureViews(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<HomeView>();
-            builder.Services.AddSingleton<HelpView>();
             builder.Services.AddSingleton<SettingsView>();
             builder.Services.AddSingleton<RouteManageView>();
 
