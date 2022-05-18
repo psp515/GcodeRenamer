@@ -54,12 +54,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\FilamentTypeViews\FilamentTypesView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\FilamentTypeViews\ManageFilamentTypeView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\HelpView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

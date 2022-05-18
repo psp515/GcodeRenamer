@@ -61,10 +61,17 @@
             await Task.Delay(DELAY);
 
             string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-            if (path != null || path == "Cancel")
+            if (path == null || path == "Cancel")
                 return;
 
-            await RouteService.AddItemAsync(new DirectoryPath { Path = path });
+            path = path.Trim();
+
+            if (!Validation.IsPath(path))
+                return;
+
+            DirectoryPath dpath = new DirectoryPath { Path = path };
+            await RouteService.AddItemAsync(dpath);
+            DirectoriesPaths.Add(dpath);
 
             IsBusy = false;
         }
@@ -76,14 +83,23 @@
 
             IsBusy = true;
             await Task.Delay(DELAY);
-
+            
             string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
+            path = path.Trim();
+
+            int x = DirectoriesPaths.IndexOf(directoryPath);
+
             if (path != null || path == "Cancel" || path == directoryPath.Path)
+                return;
+            
+            if (!Validation.IsPath(path) || x == -1)
                 return;
 
             directoryPath.Path = path;
 
             await RouteService.UpdateItemAsync(directoryPath);
+
+            DirectoriesPaths[x] = directoryPath;
 
             IsBusy = false;
         }
@@ -94,7 +110,6 @@
                 return;
 
             IsBusy = true;
-
 
             if (await GetBoolFromUser("Delete path","Do you want to delete this path?"))
             {

@@ -1,4 +1,5 @@
-﻿using GcodeRenamer.ViewModels.Others;
+﻿
+using GcodeRenamer.ViewModels.Others;
 
 namespace GcodeRenamer.ViewModels
 {
@@ -10,8 +11,6 @@ namespace GcodeRenamer.ViewModels
             builder.Services.AddSingleton<HelpViewModel>();
             builder.Services.AddSingleton<SettingsViewModel>();
             builder.Services.AddSingleton<RouteManageViewModel>();
-            builder.Services.AddSingleton<FilamentTypesViewModel>();
-            builder.Services.AddTransient<ManageFilamentTypeViewModel>();
 
             return builder;
         }

@@ -4,7 +4,6 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:GcodeRenamer"
        xmlns:view="clr-namespace:GcodeRenamer.Views"
-       xmlns:filament="clr-namespace:GcodeRenamer.Views.FilamentType"
        xmlns:sys="clr-namespace:System;assembly=netstandard"
        Shell.NavBarIsVisible="False"
        Shell.FlyoutBehavior="Locked">
@@ -12,6 +11,7 @@
     <Shell.FlyoutHeader>
         <StackLayout>
             <Frame Style="{StaticResource CollectionViewFrame}"
+                   BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDarkHT},Light= {StaticResource PrimaryHT}}"
                    CornerRadius="30"
                    HeightRequest="200">
                 <!-- ikonka -->
@@ -22,7 +22,7 @@
     <Shell.FlyoutFooter>
 
         <StackLayout HeightRequest="60"
-                     BackgroundColor="{AppThemeBinding Dark={StaticResource SecondaryDark},Light= {StaticResource Secondary}}">
+                     BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDarkHT},Light= {StaticResource PrimaryHT}}">
             <Label Style="{StaticResource MediumLabel}"
                    Margin="0,5,0,0"
                    Text="Gcode Renamer"
@@ -36,26 +36,27 @@
 
 
 
-    <ShellContent ContentTemplate="{DataTemplate local:HomeView}"
-                  Title="Home"
-                  Route="HomeView" />
+    <FlyoutItem Title="Home">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:HomeView}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Route Manager">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:RouteManageView}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Help">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:HelpView}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Settings">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:SettingsView}" />
+        </Tab>
+    </FlyoutItem>
 
-    <ShellContent ContentTemplate="{DataTemplate local:RouteManageView}"
-                  Title="Route Manager"
-                  Route="RouteManageView" />
-
-    <ShellContent ContentTemplate="{DataTemplate filament:FilamentTypesView}"
-                  Title="Filament Type Manager"
-                  Route="FilamentTypesView" />
-
-
-    <ShellContent ContentTemplate="{DataTemplate local:HelpView}"
-                  Title="Help"
-                  Route="HelpView" />
-
-    <ShellContent ContentTemplate="{DataTemplate local:SettingsView}"
-                  Title="Settings"
-                  Route="SettingsView" />
 
 
 </Shell>

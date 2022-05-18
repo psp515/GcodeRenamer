@@ -31,6 +31,7 @@ namespace GcodeRenamer.ViewModels
 
         public HomeViewModel(FileService fileService, FolderService folderService, RouteService routeService)
         {
+
             RouteService = routeService;
             FolderPicker = folderService;
             FileService = fileService;

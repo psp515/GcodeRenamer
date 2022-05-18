@@ -26,9 +26,9 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*" />
-                <ColumnDefinition Width="0.1*" />
-                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="0.29*" />
+                <ColumnDefinition Width="0.01*" />
+                <ColumnDefinition Width="0.7*" />
             </Grid.ColumnDefinitions>
 
             <Label Style="{StaticResource LargeLabel}"
@@ -39,9 +39,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="0"
                     ItemsSource="{Binding Themes}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="250"
                     ItemDisplayBinding="{Binding Data}"
                     SelectedIndex="{Binding SelcetedThemeIndex}" />
 
@@ -55,9 +52,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="1"
                     ItemsSource="{Binding Filaments}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="250"
                     ItemDisplayBinding="{Binding Data.Type}"
                     SelectedIndex="{Binding SelectedFilamentIndex}" />
 
@@ -69,9 +63,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="2"
                     ItemsSource="{Binding FileFormats}"
-                    HorizontalOptions="Center"
-                    WidthRequest="250"
-                    VerticalOptions="Center"
                     ItemDisplayBinding="{Binding Data}"
                     SelectedIndex="{Binding SelectedFileForamatIndex}" />
 
@@ -83,9 +74,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="3"
                     ItemsSource="{Binding WeightFormats}"
-                    HorizontalOptions="Center"
-                    WidthRequest="250"
-                    VerticalOptions="Center"
                     ItemDisplayBinding="{Binding Data}"
                     SelectedIndex="{Binding SelectedWeightFormatIndex}" />
 
@@ -97,9 +85,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="4"
                     ItemsSource="{Binding LengthFormats}"
-                    HorizontalOptions="Center"
-                    WidthRequest="250"
-                    VerticalOptions="Center"
                     ItemDisplayBinding="{Binding Data}"
                     SelectedIndex="{Binding SelectedLengthFormatIndex}" />
 
@@ -111,9 +96,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="5"
                     ItemsSource="{Binding TimeFormats}"
-                    HorizontalOptions="Center"
-                    WidthRequest="250"
-                    VerticalOptions="Center"
                     ItemDisplayBinding="{Binding Data}"
                     SelectedIndex="{Binding SelectedTimeFormatIndex}" />
 
@@ -125,9 +107,6 @@
             <Picker Grid.Column="0"
                     Grid.Row="6"
                     ItemsSource="{Binding RadiusFormats}"
-                    HorizontalOptions="Center"
-                    WidthRequest="250"
-                    VerticalOptions="Center"
                     ItemDisplayBinding="{Binding Data,StringFormat='{0} mm'}"
                     SelectedIndex="{Binding SelectedRadiusFormat}" />
 
@@ -135,8 +114,10 @@
             <Button Style="{StaticResource CollectionViewButton}"
                     Grid.ColumnSpan="3"
                     Grid.Row="7"
+                    Margin="6,20,0,0"
                     Text="Update Settings"
                     WidthRequest="200"
+                    CornerRadius="15"
                     HeightRequest="40"
                     HorizontalOptions="Start"
                     Command="{Binding UpdateSettingsCommand}" />

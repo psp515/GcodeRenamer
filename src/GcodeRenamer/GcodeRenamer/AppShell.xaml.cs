@@ -11,6 +11,6 @@ public partial class AppShell : Shell
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        InjectSettings.SetTheme();
+        InjectSettings.SetSettings();
     }
 }

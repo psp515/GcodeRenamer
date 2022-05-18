@@ -10,6 +10,5 @@ global using GcodeRenamer.Services;
 global using GcodeRenamer.Utils;
 global using GcodeRenamer.ViewModels;
 global using GcodeRenamer.Views;
-global using GcodeRenamer.Views.FilamentType;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;

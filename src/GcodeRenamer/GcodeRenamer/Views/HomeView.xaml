@@ -90,7 +90,7 @@
 
                 <CollectionView.Header>
                     <StackLayout>
-                        <Frame Style="{StaticResource CollectionViewFrame}" HeightRequest="140" Padding="15,4,15,4">
+                        <Frame Style="{StaticResource CollectionViewFrame}" HeightRequest="155" Padding="15,4,15,4">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.5*" />
@@ -108,7 +108,7 @@
                                         HeightRequest="60"
                                         Command="{Binding ConvertFilesCommand, Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}}" />
 
-                                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="50" Grid.Row="1">
+                                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="50" Grid.Row="1" Margin="0,0,0,10">
                                     
                                     <Picker ItemsSource="{Binding Filaments}"
                                             Grid.Row="1"
@@ -125,6 +125,7 @@
                                             Grid.Row="1"
                                             ItemDisplayBinding="{Binding Data}"
                                             SelectedItem="{Binding SelectedFileForamat}" />
+                                    
                                 </HorizontalStackLayout>
 
                             </Grid>

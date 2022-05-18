@@ -25,7 +25,6 @@ namespace GcodeRenamer.Services
 
             /* DB */
             builder.Services.AddSingleton<RouteService>();
-            builder.Services.AddSingleton<FilamentService>();
 
             return builder;
         }

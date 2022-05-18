@@ -3,33 +3,22 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="Light">#DFD8F7</Color>
-    <Color x:Key="Dark">#2B0B98</Color>
-    <Color x:Key="White">White</Color>
+    
+    <Color x:Key="White">#F5F5F5</Color>
     <Color x:Key="Black">Black</Color>
-    <Color x:Key="Yellow100Accent">#F7B548</Color>
-    <Color x:Key="Yellow200Accent">#FFD590</Color>
-    <Color x:Key="Yellow300Accent">#FFE5B9</Color>
-    <Color x:Key="Cyan100Accent">#28C2D1</Color>
-    <Color x:Key="Cyan200Accent">#7BDDEF</Color>
-    <Color x:Key="Cyan300Accent">#C3F2F4</Color>
-    <Color x:Key="Blue100Accent">#3E8EED</Color>
-    <Color x:Key="Blue200Accent">#72ACF1</Color>
-    <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
 
-    <Color x:Key="Primary">#3E8EED</Color>
-    <Color x:Key="PrimaryHT">#803E8EED</Color>
-    <Color x:Key="Secondary">#72ACF1</Color>
-    <Color x:Key="Tetruary">#A7CBF6</Color>
+    <Color x:Key="Primary">#802B0B98</Color>
+    <Color x:Key="PrimaryHT">#502B0B98</Color>
+    <Color x:Key="Secondary">#DFD8F7</Color>
+    <Color x:Key="Tetruary">#F5F5F5</Color>
     <Color x:Key="TextColor">Black</Color>
 
     <Color x:Key="PrimaryDark">#2B0B98</Color>
     <Color x:Key="PrimaryDarkHT">#802B0B98</Color>
     <Color x:Key="SecondaryDark">Black</Color>
-    <Color x:Key="TetruaryDark">DarkGray</Color>
+    <Color x:Key="TetruaryDark">#505050</Color>
     <Color x:Key="TextColorDark">White</Color>
-
 
 
     <Color x:Key="LightGray">#E5E5E1</Color>
@@ -72,7 +61,7 @@
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Pressed">
+                    <VisualState x:Name="MouseOver">
                         <VisualState.Setters>
                             <Setter Property="BackgroundColor"
                                     Value="{AppThemeBinding Light={StaticResource PrimaryHT}, Dark={StaticResource PrimaryDarkHT}}" />
@@ -122,7 +111,43 @@
         <Setter Property="FontAttributes"
                 Value="Bold" />
     </Style>
+    
+    
+    <!-- Picker -->
 
+    <Style TargetType="Picker">
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource PrimaryHT}, Dark={StaticResource PrimaryDarkHT}}"/>
+
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+
+        <Setter Property="TitleColor"
+                Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource TextColorDark}}" />
+        
+        <Setter Property="WidthRequest"
+                Value="250" />
+
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+                            <Setter  Property="TextColor"
+                                     Value="{AppThemeBinding Dark={StaticResource TextColorDark},Light={StaticResource TextColor}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+
+    </Style>
 
     <!-- Standard Styles -->
 
@@ -149,7 +174,7 @@
                     <VisualState x:Name="Normal">
                         <VisualState.Setters>
                             <Setter Property="BackgroundColor"
-                                    Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
+                                    Value="{AppThemeBinding Light={StaticResource PrimaryHT}, Dark={StaticResource PrimaryDarkHT}}" />
                             <Setter TargetName="FlyoutItemLabel"
                                     Property="Label.TextColor"
                                     Value="{AppThemeBinding Dark={StaticResource TextColorDark},Light={StaticResource TextColor}}" />

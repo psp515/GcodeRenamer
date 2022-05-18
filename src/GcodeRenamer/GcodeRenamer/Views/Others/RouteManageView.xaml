@@ -14,43 +14,61 @@
         <CollectionView Margin="0,30,0,0"
                         ItemsSource="{Binding DirectoriesPaths}"
                         WidthRequest="700"
-                        HorizontalOptions="Start"
-                        Footer="{Binding .}">
+                        HorizontalOptions="Start">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:DirectoryPath">
-                    <StackLayout HeightRequest="50"
-                                 WidthRequest="600"
-                                 HorizontalOptions="FillAndExpand">
-                        <Frame Style="{StaticResource CollectionViewFrame}"
-                               HorizontalOptions="FillAndExpand">
-                            <Grid>
+                    <StackLayout WidthRequest="650">
+                        <Frame Style="{StaticResource CollectionViewFrame}">
+                            <Grid HeightRequest="40">
                                 <Grid.ColumnDefinitions>
-                                    
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="0.25*" />
+                                    <ColumnDefinition Width="0.25*" />
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Label Style="{StaticResource MediumLabel}"
+                                       VerticalOptions="Center"
                                        Text="{Binding Path, StringFormat='Directory Path: {0}' }" />
+
+                                <Button Style="{StaticResource CollectionViewButton}"
+                                        Grid.Column="1"
+                                        WidthRequest="90"
+                                        HeightRequest="32"
+                                        Text="Edit"
+                                        Padding="0"
+                                        Margin="0,4,0,4"
+                                        Command="{Binding EditRouteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:RouteManageViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+
+                                <Button Style="{StaticResource CollectionViewButton}"
+                                        Grid.Column="2"
+                                        Text="Delete"
+                                        WidthRequest="90"
+                                        HeightRequest="32"
+                                        Padding="0"
+                                        Margin="0,4,0,4"
+                                        Command="{Binding DeleteRouteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:RouteManageViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+
                             </Grid>
                         </Frame>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
-            <CollectionView.FooterTemplate>
-                <DataTemplate>
-                    <StackLayout HeightRequest="50"
-                                 WidthRequest="600"
-                                 HorizontalOptions="FillAndExpand">
-                        <Frame Style="{StaticResource CollectionViewFrame}"
-                               HorizontalOptions="FillAndExpand">
-                            <StackLayout>
-                                <Label Style="{StaticResource MediumLabel}"
-                                       Text="+" />
-                            </StackLayout>
-                        </Frame>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.FooterTemplate>
+            <CollectionView.Footer>
+                <StackLayout>
+                    <Button Style="{StaticResource CollectionViewButton}"
+                            Command="{Binding AddRouteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:RouteManageViewModel}} }"
+                            HorizontalOptions="Start"
+                            Text="Add new route"
+                            HeightRequest="50"
+                            Margin="10"
+                            CornerRadius="20"
+                            FontAttributes="Bold"
+                            WidthRequest="180" />
+                </StackLayout>
+            </CollectionView.Footer>
         </CollectionView>
     </StackLayout>
 </ContentPage>
