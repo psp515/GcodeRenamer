@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GcodeRenamer.Models"
+             xmlns:viewmodels="clr-namespace:GcodeRenamer.ViewModels.Others"
+             x:Class="GcodeRenamer.RouteManageView">
+
+    <StackLayout Style="{StaticResource BaseStackLayout}"
+                 Padding="40">
+
+        <Label Style="{StaticResource TitleLabel}"
+               Text="Folder Paths" />
+
+        <CollectionView Margin="0,30,0,0"
+                        ItemsSource="{Binding DirectoriesPaths}"
+                        WidthRequest="700"
+                        HorizontalOptions="Start">
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:DirectoryPath">
+                    <StackLayout WidthRequest="650">
+                        <Frame Style="{StaticResource CollectionViewFrame}">
+                            <Grid HeightRequest="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="0.25*" />
+                                    <ColumnDefinition Width="0.25*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Style="{StaticResource MediumLabel}"
+                                       VerticalOptions="Center"
+                                       Text="{Binding Path, StringFormat='Directory Path: {0}' }" />
+
+                                <Button Style="{StaticResource CollectionViewButton}"
+                                        Grid.Column="1"
+                                        WidthRequest="90"
+                                        HeightRequest="32"
+                                        Text="Edit"
+                                        Padding="0"
+                                        Margin="0,4,0,4"
+                                        Command="{Binding EditRouteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:RouteManageViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+
+                                <Button Style="{StaticResource CollectionViewButton}"
+                                        Grid.Column="2"
+                                        Text="Delete"
+                                        WidthRequest="90"
+                                        HeightRequest="32"
+                                        Padding="0"
+                                        Margin="0,4,0,4"
+                                        Command="{Binding DeleteRouteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:RouteManageViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Footer>
+                <StackLayout>
+                    <Button Style="{StaticResource CollectionViewButton}"
+                            Command="{Binding AddRouteCommand, Source={RelativeSource AncestorType={x:Type viewmodels:RouteManageViewModel}} }"
+                            HorizontalOptions="Start"
+                            Text="Add new route"
+                            HeightRequest="50"
+                            Margin="10"
+                            CornerRadius="20"
+                            FontAttributes="Bold"
+                            WidthRequest="180" />
+                </StackLayout>
+            </CollectionView.Footer>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

@@ -9,6 +9,7 @@
 
   <Properties>
     <PublisherDisplayName>User Name</PublisherDisplayName>
+    <Logo>Resources\Images\edit.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -22,7 +23,17 @@
 
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
-      <uap:VisualElements />
+      <uap:VisualElements  DisplayName="Gcode Renamer" Description="Simple apliaction focused on renaming gcode files." Square44x44Logo="Resources\Images\edit.png" Square150x150Logo="Resources\Images\edit.png">
+        <uap:DefaultTile ShortName="GCR" Square310x310Logo="Resources\Images\edit.png" Wide310x150Logo="Resources\Images\edit.png" Square71x71Logo="Resources\Images\edit.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square310x310Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square150x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Resources\Images\edit.png"/>
+        <uap:LockScreen BadgeLogo="Resources\Images\edit.png" Notification="badge"/>
+      </uap:VisualElements >
     </Application>
   </Applications>
 

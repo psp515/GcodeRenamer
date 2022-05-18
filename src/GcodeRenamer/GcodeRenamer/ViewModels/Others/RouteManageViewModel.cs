@@ -1,18 +1,9 @@
-﻿using GcodeRenamer.Models;
-using GcodeRenamer.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GcodeRenamer.ViewModels
+﻿namespace GcodeRenamer.ViewModels.Others
 {
     public class RouteManageViewModel : BaseViewModel
     {
 
-        public ObservableCollection<DirectoryPath> Paths;
+        public ObservableCollection<DirectoryPath> DirectoriesPaths { get; set; }
 
         RouteService RouteService;
 
@@ -25,7 +16,7 @@ namespace GcodeRenamer.ViewModels
 
         public RouteManageViewModel(RouteService routeService)
         {
-            Paths = new ObservableCollection<DirectoryPath>();
+            DirectoriesPaths = new ObservableCollection<DirectoryPath>();
             RouteService = routeService;
 
             RefreshCollectionCommand = new Command(RefreshCollection);
@@ -39,8 +30,8 @@ namespace GcodeRenamer.ViewModels
             base.OnAppearing();
 
             foreach (DirectoryPath path in await RouteService.GetItemsAsync())
-                if (!Paths.Any(x => x.Id == path.Id))
-                    Paths.Add(path);
+                if (!DirectoriesPaths.Any(x => x.Id == path.Id))
+                    DirectoriesPaths.Add(path);
 
         }
 
@@ -52,10 +43,10 @@ namespace GcodeRenamer.ViewModels
             IsBusy = true;
             await Task.Delay(DELAY);
 
-            Paths.Clear();
+            DirectoriesPaths.Clear();
 
             foreach (DirectoryPath Route in await RouteService.GetItemsAsync())
-                Paths.Add(Route);
+                DirectoriesPaths.Add(Route);
 
             IsBusy = false;
         }
@@ -70,10 +61,17 @@ namespace GcodeRenamer.ViewModels
             await Task.Delay(DELAY);
 
             string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-            if (path != null || path == "Cancel")
+            if (path == null || path == "Cancel")
                 return;
 
-            await RouteService.AddItemAsync(new DirectoryPath { Path = path });
+            path = path.Trim();
+
+            if (!Validation.IsPath(path))
+                return;
+
+            DirectoryPath dpath = new DirectoryPath { Path = path };
+            await RouteService.AddItemAsync(dpath);
+            DirectoriesPaths.Add(dpath);
 
             IsBusy = false;
         }
@@ -85,14 +83,23 @@ namespace GcodeRenamer.ViewModels
 
             IsBusy = true;
             await Task.Delay(DELAY);
-
+            
             string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
+            path = path.Trim();
+
+            int x = DirectoriesPaths.IndexOf(directoryPath);
+
             if (path != null || path == "Cancel" || path == directoryPath.Path)
+                return;
+            
+            if (!Validation.IsPath(path) || x == -1)
                 return;
 
             directoryPath.Path = path;
 
             await RouteService.UpdateItemAsync(directoryPath);
+
+            DirectoriesPaths[x] = directoryPath;
 
             IsBusy = false;
         }
@@ -104,11 +111,11 @@ namespace GcodeRenamer.ViewModels
 
             IsBusy = true;
 
-
-            if (await GetBoolFromUser("Do you want to delete this item?"))
+            if (await GetBoolFromUser("Delete path","Do you want to delete this path?"))
             {
                 await Task.Delay(DELAY);
                 await RouteService.DeleteItemAsync(directoryPath.Id);
+                DirectoriesPaths.Remove(directoryPath);
             }
 
             IsBusy = false;

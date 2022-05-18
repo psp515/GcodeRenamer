@@ -1,0 +1,14 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using SQLite;
+global using GcodeRenamer.Interfaces;
+global using GcodeRenamer.Models;
+global using GcodeRenamer.Services;
+global using GcodeRenamer.Utils;
+global using GcodeRenamer.ViewModels;
+global using GcodeRenamer.Views;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;

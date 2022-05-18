@@ -16,10 +16,4 @@ public partial class SettingsView : ContentPage
         base.OnAppearing();
 		ViewModel.OnAppearing();
 	}
-
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-		ViewModel.OnDisappearing();
-    }
 }

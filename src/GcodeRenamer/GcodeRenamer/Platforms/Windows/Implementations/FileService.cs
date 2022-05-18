@@ -66,7 +66,7 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
             
                     List<string> predictions = new List<string>();
 
-                    foreach(PickerData<FilamentType> filament in Helpers.Filaments)
+                    foreach(PickerData<FilamentType> filament in Helpers.PickerFilaments)
                         if (filament.Data.IsInTemperatureRange(filamentTemperature))
                             predictions.Add(filament.Data.Type);
                       
@@ -74,7 +74,7 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
 
                     Files.Add(new GcodeFile()
                     {
-                        Name = fileInfo.Name.Replace(".gcode", ""),
+                        FileName = fileInfo.Name.Replace(".gcode", ""),
                         FilePath = fileInfo.FullName,
                         DirectoryPath = fileInfo.DirectoryName,
 

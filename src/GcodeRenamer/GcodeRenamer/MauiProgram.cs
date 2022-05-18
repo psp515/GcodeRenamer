@@ -1,16 +1,11 @@
-﻿using GcodeRenamer.Services;
-using GcodeRenamer.ViewModels;
-using GcodeRenamer.Views;
-
-namespace GcodeRenamer;
+﻿namespace GcodeRenamer;
 
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+		builder.UseMauiApp<App>()
 			.ConfigureServices()
 			.ConfigureViewModels()
 			.ConfigureViews()
@@ -20,9 +15,6 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-
-		//DependencyInjcetion ToDo bo nie działa jakies dziwne problmey
-
-        return builder.Build();
+		return builder.Build();
 	}
 }

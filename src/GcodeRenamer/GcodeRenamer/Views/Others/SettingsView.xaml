@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GcodeRenamer.SettingsView"
+             Title="SettingsView">
+
+    <StackLayout Style="{StaticResource BaseStackLayout}">
+
+
+        <Label Style="{StaticResource TitleLabel}"
+               Text="Settings" />
+
+
+        <Grid RowSpacing="20"
+              Margin="0,40,0,0"
+              Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.29*" />
+                <ColumnDefinition Width="0.01*" />
+                <ColumnDefinition Width="0.7*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="0"
+                   Text="App theme."
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="0"
+                    ItemsSource="{Binding Themes}"
+                    ItemDisplayBinding="{Binding Data}"
+                    SelectedIndex="{Binding SelcetedThemeIndex}" />
+
+            
+            
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="1"
+                   Text="Default filament for convertion."
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="1"
+                    ItemsSource="{Binding Filaments}"
+                    ItemDisplayBinding="{Binding Data.Type}"
+                    SelectedIndex="{Binding SelectedFilamentIndex}" />
+
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="2"
+                   Text="Default file format"
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="2"
+                    ItemsSource="{Binding FileFormats}"
+                    ItemDisplayBinding="{Binding Data}"
+                    SelectedIndex="{Binding SelectedFileForamatIndex}" />
+
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="3"
+                   Text="Weight Format"
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="3"
+                    ItemsSource="{Binding WeightFormats}"
+                    ItemDisplayBinding="{Binding Data}"
+                    SelectedIndex="{Binding SelectedWeightFormatIndex}" />
+
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="4"
+                   Text="Length Format"
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="4"
+                    ItemsSource="{Binding LengthFormats}"
+                    ItemDisplayBinding="{Binding Data}"
+                    SelectedIndex="{Binding SelectedLengthFormatIndex}" />
+
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="5"
+                   Text="Time Format"
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="5"
+                    ItemsSource="{Binding TimeFormats}"
+                    ItemDisplayBinding="{Binding Data}"
+                    SelectedIndex="{Binding SelectedTimeFormatIndex}" />
+
+            <Label Style="{StaticResource LargeLabel}"
+                   Grid.Column="2"
+                   Grid.Row="6"
+                   Text="Filament Diameter"
+                   VerticalOptions="Center" />
+            <Picker Grid.Column="0"
+                    Grid.Row="6"
+                    ItemsSource="{Binding RadiusFormats}"
+                    ItemDisplayBinding="{Binding Data,StringFormat='{0} mm'}"
+                    SelectedIndex="{Binding SelectedRadiusFormat}" />
+
+
+            <Button Style="{StaticResource CollectionViewButton}"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="7"
+                    Margin="6,20,0,0"
+                    Text="Update Settings"
+                    WidthRequest="200"
+                    CornerRadius="15"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    Command="{Binding UpdateSettingsCommand}" />
+
+        </Grid>
+    </StackLayout>
+</ContentPage>

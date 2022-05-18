@@ -1,12 +1,4 @@
-﻿using GcodeRenamer.Models;
-using GcodeRenamer.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GcodeRenamer.ViewModels
+﻿namespace GcodeRenamer.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
@@ -20,29 +12,34 @@ namespace GcodeRenamer.ViewModels
         public List<PickerData<string>> RadiusFormats { get; set; }
 
 
-        int selectedFileForamat, theme, selectedTimeFormat, selectedWeightFormat, selectedLengthFormat, selectedRadiusFormat;
-        public int SelectedFileForamatIndex { get => selectedFileForamat; set => SetProperty(ref selectedFileForamat, value); }
-        public int SelcetedThemeIndex { get => theme; set => SetProperty(ref theme,value); }
-        public int SelectedTimeFormatIndex { get => selectedTimeFormat; set => SetProperty(ref selectedTimeFormat, value); }
-        public int SelectedWeightFormatIndex { get => selectedWeightFormat; set => SetProperty(ref selectedWeightFormat, value); }
-        public int SelectedLengthFormatIndex { get => selectedLengthFormat; set => SetProperty(ref selectedLengthFormat, value); }
-        public int SelectedRadiusFormat { get => selectedRadiusFormat; set => SetProperty(ref selectedRadiusFormat, value); }
+        int selectedFileForamat, theme, selectedTimeFormat, selectedWeightFormat, selectedLengthFormat, selectedRadiusFormat, selectedFilament;
+        public int SelectedFileForamatIndex { get => selectedFileForamat; set => SetProperty(ref selectedFileForamat, value, ""); }
+        public int SelcetedThemeIndex { get => theme; set => SetProperty(ref theme, value, ""); }
+        public int SelectedTimeFormatIndex { get => selectedTimeFormat; set => SetProperty(ref selectedTimeFormat, value, ""); }
+        public int SelectedWeightFormatIndex { get => selectedWeightFormat; set => SetProperty(ref selectedWeightFormat, value, ""); }
+        public int SelectedLengthFormatIndex { get => selectedLengthFormat; set => SetProperty(ref selectedLengthFormat, value, ""); }
+        public int SelectedRadiusFormat { get => selectedRadiusFormat; set => SetProperty(ref selectedRadiusFormat, value, ""); }
 
-
-        PickerData<FilamentType> selectedFilament;
-        public PickerData<FilamentType> SelectedFilament { get => selectedFilament; set => SetProperty(ref selectedFilament, value); }
+        public int SelectedFilamentIndex { get => selectedFilament; set => SetProperty(ref selectedFilament, value, ""); }
 
         public Command UpdateSettingsCommand { get; }
 
         public SettingsViewModel()
         {
             Themes = Helpers.Themes;
-            Filaments = Helpers.Filaments;
+            Filaments = Helpers.PickerFilaments;
             FileFormats = Helpers.FileForamts;
             TimeFormats = Helpers.TimeFormats;
             WeightFormats = Helpers.WeightFormats;
             LengthFormats = Helpers.LengthFormats;
             RadiusFormats = Helpers.Radius;
+
+            SelectedFilamentIndex = Settings.Filament;
+            SelcetedThemeIndex = Settings.Theme;
+            SelectedFileForamatIndex = Settings.FileForamat;
+            SelectedLengthFormatIndex = Settings.LengthFormat;
+            SelectedWeightFormatIndex = Settings.WeightFormat;
+            SelectedTimeFormatIndex = Settings.TimeFormat;
 
             UpdateSettingsCommand = new Command(UpdateSettings);
         }
@@ -51,7 +48,7 @@ namespace GcodeRenamer.ViewModels
         {
             base.OnAppearing();
 
-            SelectedFilament = Filaments[Settings.Filament];
+            SelectedFilamentIndex = Settings.Filament;
             SelcetedThemeIndex = Settings.Theme;
             SelectedFileForamatIndex = Settings.FileForamat;
             SelectedLengthFormatIndex = Settings.LengthFormat;
@@ -59,16 +56,13 @@ namespace GcodeRenamer.ViewModels
             SelectedTimeFormatIndex = Settings.TimeFormat;
         }
 
-        protected internal void OnDisappearing()
-        {
-            //UpdateSettings();
-        }
-
         private async void UpdateSettings()
         {
             IsBusy = true;
 
-            Settings.Filament = SelectedFilament.Index;
+            await Task.Delay(DELAY);
+            
+            Settings.Filament = SelectedFilamentIndex;
             Settings.Theme = SelcetedThemeIndex;
             Settings.FileForamat = SelectedFileForamatIndex;
 
@@ -76,8 +70,8 @@ namespace GcodeRenamer.ViewModels
             Settings.WeightFormat = SelectedWeightFormatIndex;
             Settings.LengthFormat = SelectedLengthFormatIndex;
             Settings.Radius = SelectedRadiusFormat;
-
-            Theme.SetTheme();
+            
+            InjectSettings.SetTheme();
 
             IsBusy = false;
         }

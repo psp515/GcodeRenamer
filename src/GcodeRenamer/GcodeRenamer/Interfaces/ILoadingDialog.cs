@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GcodeRenamer.Models
+namespace GcodeRenamer.Interfaces
 {
-    public enum AppTheme
+    public interface ILoadingDialog
     {
-        Unspecified = 0,
-        Light = 1,
-        Dark = 2
+        public void MyLoadingDialog(string text);
     }
 }

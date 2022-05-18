@@ -9,7 +9,15 @@ namespace GcodeRenamer.Utils
 {
     public static class Helpers
     {
-        public static List<PickerData<FilamentType>> Filaments = new List<PickerData<FilamentType>> 
+        public static List<FilamentType> Filaments = new List<FilamentType>
+        {
+            new FilamentType("PLA", 1.24, 190, 220)  ,
+             new FilamentType("PET-G", 1.23, 230, 250) ,
+              new FilamentType("ASA", 1.07, 235, 255) ,
+              new FilamentType("ABS", 1.04, 220, 250) ,
+        };
+
+        public static List<PickerData<FilamentType>> PickerFilaments = new List<PickerData<FilamentType>> 
         {
             new PickerData<FilamentType> { Index = 0, Data = new FilamentType("PLA", 1.24, 190, 220)  },
             new PickerData<FilamentType> { Index = 1, Data = new FilamentType("PET-G", 1.23, 230, 250) },

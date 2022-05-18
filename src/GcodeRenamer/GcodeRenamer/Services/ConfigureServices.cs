@@ -14,7 +14,7 @@ namespace GcodeRenamer.Services
         public static MauiAppBuilder ConfigureServices(this MauiAppBuilder builder)
         {
 
-            /* Implementation */
+            /* Implementations */
 #if WINDOWS
             builder.Services.AddSingleton<IFileService, Platforms.Windows.Implementations.FileWindowsService>();
             builder.Services.AddSingleton<IFolderService, Platforms.Windows.Implementations.MyFolderPicker>();

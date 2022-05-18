@@ -1,7 +1,3 @@
-using GcodeRenamer.Interfaces;
-using GcodeRenamer.Services;
-using GcodeRenamer.ViewModels;
-
 namespace GcodeRenamer;
 
 public partial class HomeView : ContentPage

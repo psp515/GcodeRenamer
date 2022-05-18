@@ -1,4 +1,4 @@
-using GcodeRenamer.ViewModels;
+using GcodeRenamer.ViewModels.Others;
 
 namespace GcodeRenamer;
 
