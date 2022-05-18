@@ -61,14 +61,18 @@
             await Task.Delay(DELAY);
 
             string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-            if (path == null || path == "Cancel")
+            if (string.IsNullOrEmpty(path) || path == "Cancel") 
+            {
+                IsBusy = false;
                 return;
-
-            path = path.Trim();
+            }
 
             if (!Validation.IsPath(path))
+            {
+                IsBusy = false;
                 return;
-
+            }
+            path = path.Trim();
             DirectoryPath dpath = new DirectoryPath { Path = path };
             await RouteService.AddItemAsync(dpath);
             DirectoriesPaths.Add(dpath);
@@ -84,18 +88,24 @@
             IsBusy = true;
             await Task.Delay(DELAY);
             
-            string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...");
-            path = path.Trim();
+            string path = await Shell.Current.DisplayPromptAsync("New route", "Please pass new directory route", "OK", "Cancel", @"C:\...",-1,null,directoryPath.Path);
+            
 
             int x = DirectoriesPaths.IndexOf(directoryPath);
 
-            if (path != null || path == "Cancel" || path == directoryPath.Path)
+            if (string.IsNullOrEmpty(path) || path == "Cancel" || path == directoryPath.Path)
+            {
+                IsBusy = false;
                 return;
-            
-            if (!Validation.IsPath(path) || x == -1)
-                return;
+            }
 
-            directoryPath.Path = path;
+            if (!Validation.IsPath(path) || x == -1)
+            {
+                IsBusy = false;
+                return;
+            }
+
+            directoryPath.Path = path.Trim();
 
             await RouteService.UpdateItemAsync(directoryPath);
 

@@ -11,31 +11,45 @@ namespace GcodeRenamer.Utils
     {
         public static List<FilamentType> Filaments = new List<FilamentType>
         {
-            new FilamentType("PLA", 1.24, 190, 220)  ,
-             new FilamentType("PET-G", 1.23, 230, 250) ,
-              new FilamentType("ASA", 1.07, 235, 255) ,
-              new FilamentType("ABS", 1.04, 220, 250) ,
+            new FilamentType("PLA", 1.24, 190, 220),
+            new FilamentType("PET-G", 1.23, 230, 250),
+            new FilamentType("ASA", 1.07, 235, 255),
+            new FilamentType("ABS", 1.04, 220, 250),
+            new FilamentType("Flex", 1.2, 225, 245),
+            new FilamentType("HIPS", 1.04, 230, 245),
+            new FilamentType("Nylon", 1.1, 220, 270),
+            new FilamentType("Carbon Fiber", 1.3, 200, 230),
+            new FilamentType("Polycarbonate", 1.2, 260, 310),
+            new FilamentType("Polypropylene", 0.9, 220, 250),
+            new FilamentType("PVA", 1.23, 185, 200),
         };
 
-        public static List<PickerData<FilamentType>> PickerFilaments = new List<PickerData<FilamentType>> 
+        public static List<PickerData<FilamentType>> PickerFilaments()
         {
-            new PickerData<FilamentType> { Index = 0, Data = new FilamentType("PLA", 1.24, 190, 220)  },
-            new PickerData<FilamentType> { Index = 1, Data = new FilamentType("PET-G", 1.23, 230, 250) },
-            new PickerData<FilamentType> { Index = 2, Data = new FilamentType("ASA", 1.07, 235, 255) },
-            new PickerData<FilamentType> { Index = 3, Data = new FilamentType("ABS", 1.04, 220, 250) }, 
-        };
+            List<PickerData<FilamentType>> items = new List<PickerData<FilamentType>>();
 
+            for (int i = 0; i < Filaments.Count; i++) 
+            {
+                items.Add(new PickerData<FilamentType> { Index =i, Data = Filaments[i] });
+            }
 
-        public static List<PickerData<string>> FileForamts = new List<PickerData<string>> 
+            return items;
+        }
+
+        public static List<PickerData<string>> FileForamts = new List<PickerData<string>>
         {
             new PickerData<string> { Index = 0, Data="name-time-weight" },
-            new PickerData<string> { Index = 1, Data="weight-time-name" },
-            new PickerData<string> { Index = 2, Data="name-time-length" },
-            new PickerData<string> { Index = 2, Data="length-time-name" },
+            new PickerData<string> { Index = 1, Data="name-time-length" },
+            new PickerData<string> { Index = 2, Data="weight-time-name" },
+            new PickerData<string> { Index = 3, Data="length-time-name" },
+            new PickerData<string> { Index = 4, Data="weight-length-time-name" },
+            new PickerData<string> { Index = 5, Data="length-time-weight-name" },
+            new PickerData<string> { Index = 6, Data="name-length-time-weight" },
+            new PickerData<string> { Index = 7, Data="name-time-weight-length" },
         };
 
 
-        public static List<PickerData<string>> Themes = new List<PickerData<string>> 
+        public static List<PickerData<string>> Themes = new List<PickerData<string>>
         {
             new PickerData<string> { Index = 0, Data="Device" },
             new PickerData<string> { Index = 1, Data="Light" },
@@ -51,8 +65,8 @@ namespace GcodeRenamer.Utils
         public static List<PickerData<string>> TimeFormats = new List<PickerData<string>>
         {
             new PickerData<string> { Index = 0, Data="hh:mm:ss" },
-            new PickerData<string> { Index = 1, Data="hh" },
-            new PickerData<string> { Index = 2, Data="hh:mm"  },
+            new PickerData<string> { Index = 1, Data="hh:mm" },
+            new PickerData<string> { Index = 2, Data="hh"  },
         };
 
         public static List<PickerData<string>> LengthFormats = new List<PickerData<string>>
@@ -67,6 +81,7 @@ namespace GcodeRenamer.Utils
         {
             new PickerData<string> { Index = 0, Data="1.75" },
             new PickerData<string> { Index = 1, Data="2.85" },
+            new PickerData<string> { Index = 1, Data="3" },
         };
 
     }

@@ -66,7 +66,7 @@ namespace GcodeRenamer.Platforms.Windows.Implementations
             
                     List<string> predictions = new List<string>();
 
-                    foreach(PickerData<FilamentType> filament in Helpers.PickerFilaments)
+                    foreach(PickerData<FilamentType> filament in Helpers.PickerFilaments())
                         if (filament.Data.IsInTemperatureRange(filamentTemperature))
                             predictions.Add(filament.Data.Type);
                       

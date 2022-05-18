@@ -27,7 +27,7 @@
         public SettingsViewModel()
         {
             Themes = Helpers.Themes;
-            Filaments = Helpers.PickerFilaments;
+            Filaments = Helpers.PickerFilaments();
             FileFormats = Helpers.FileForamts;
             TimeFormats = Helpers.TimeFormats;
             WeightFormats = Helpers.WeightFormats;
